@@ -29,146 +29,57 @@
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: 'Sora', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
-
-/* LOGIN */
-.login-wrap {
-  min-height: 100vh;
-  display: flex; align-items: center; justify-content: center;
-  padding: 2rem;
-}
-.login-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--rl);
-  padding: 2.5rem;
-  width: 100%; max-width: 420px;
-  box-shadow: 0 4px 24px rgba(0,0,0,.06);
-  animation: fadeUp .4s ease;
-}
+.login-wrap { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 2rem; }
+.login-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--rl); padding: 2.5rem; width: 100%; max-width: 420px; box-shadow: 0 4px 24px rgba(0,0,0,.06); animation: fadeUp .4s ease; }
 @keyframes fadeUp { from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);} }
-
-.login-logo {
-  width: 44px; height: 44px; border-radius: 12px;
-  background: var(--navy);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 18px; font-weight: 700; color: #fff;
-  margin-bottom: 1.5rem;
-}
+.login-logo { width: 44px; height: 44px; border-radius: 12px; background: var(--navy); display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 1.5rem; }
 .login-title { font-size: 22px; font-weight: 600; margin-bottom: .4rem; }
 .login-sub { font-size: 13px; color: var(--text2); margin-bottom: 2rem; line-height: 1.55; }
 .login-label { font-size: 12px; font-weight: 500; color: var(--text2); margin-bottom: .4rem; display: block; }
-.login-input {
-  width: 100%; height: 44px; padding: 0 14px;
-  border: 1.5px solid var(--border); border-radius: var(--r);
-  font-family: 'Sora', sans-serif; font-size: 14px; color: var(--text);
-  background: var(--surface2); outline: none;
-  transition: border-color .2s, background .2s;
-  margin-bottom: 1rem;
-}
+.login-input { width: 100%; height: 44px; padding: 0 14px; border: 1.5px solid var(--border); border-radius: var(--r); font-family: 'Sora', sans-serif; font-size: 14px; color: var(--text); background: var(--surface2); outline: none; transition: border-color .2s, background .2s; margin-bottom: 1rem; }
 .login-input:focus { border-color: var(--navy); background: var(--surface); }
 .login-err { font-size: 12px; color: var(--red); margin-bottom: .75rem; display: none; }
-.btn-login {
-  width: 100%; height: 44px;
-  background: var(--navy); color: #fff; border: none;
-  border-radius: var(--r); font-family: 'Sora', sans-serif;
-  font-size: 14px; font-weight: 500; cursor: pointer;
-  transition: all .15s;
-}
+.btn-login { width: 100%; height: 44px; background: var(--navy); color: #fff; border: none; border-radius: var(--r); font-family: 'Sora', sans-serif; font-size: 14px; font-weight: 500; cursor: pointer; transition: all .15s; }
 .btn-login:hover { background: #142248; transform: translateY(-1px); }
 .btn-login:active { transform: scale(.98); }
 .btn-login:disabled { background: #8a9fc5; cursor: not-allowed; transform: none; }
-
-/* DASHBOARD */
 .dashboard { display: none; min-height: 100vh; }
-
-.dash-header {
-  background: var(--navy);
-  padding: 1.25rem 2rem;
-  display: flex; align-items: center; justify-content: space-between;
-}
+.dash-header { background: var(--navy); padding: 1.25rem 2rem; display: flex; align-items: center; justify-content: space-between; }
 .dash-header-left { display: flex; align-items: center; gap: 14px; }
 .dash-logo { width: 36px; height: 36px; border-radius: 9px; background: rgba(255,255,255,.12); display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 700; color: #fff; }
 .dash-title { font-size: 15px; font-weight: 600; color: #fff; }
 .dash-sub { font-size: 11px; color: rgba(255,255,255,.45); margin-top: 1px; }
 .dash-user { font-size: 12px; color: rgba(255,255,255,.5); cursor: pointer; transition: color .15s; }
 .dash-user:hover { color: rgba(255,255,255,.85); }
-
 .dash-main { padding: 2rem 2rem; max-width: 860px; margin: 0 auto; }
-
-/* HERO ÉLÈVE */
-.eleve-hero {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--rl);
-  padding: 1.75rem 2rem;
-  margin-bottom: 1.5rem;
-  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
-}
-.eleve-info {}
+.eleve-hero { background: var(--surface); border: 1px solid var(--border); border-radius: var(--rl); padding: 1.75rem 2rem; margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
 .eleve-name { font-size: 22px; font-weight: 600; letter-spacing: -.3px; margin-bottom: 3px; }
 .eleve-meta { font-size: 13px; color: var(--text2); }
 .eleve-stats { display: flex; gap: 1.5rem; }
 .estat { text-align: center; }
 .estat-val { font-size: 28px; font-weight: 600; font-family: 'JetBrains Mono', monospace; color: var(--navy); line-height: 1; }
 .estat-lbl { font-size: 10px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--text3); margin-top: 4px; }
-
-/* PROGRESS GLOBAL */
-.progress-panel {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--rl);
-  padding: 1.5rem 2rem;
-  margin-bottom: 1.5rem;
-}
+.progress-panel { background: var(--surface); border: 1px solid var(--border); border-radius: var(--rl); padding: 1.5rem 2rem; margin-bottom: 1.5rem; }
 .progress-panel-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
 .progress-panel-title { font-size: 14px; font-weight: 600; }
 .progress-panel-pct { font-size: 20px; font-weight: 600; font-family: 'JetBrains Mono', monospace; color: var(--green); }
 .progress-track { height: 8px; background: var(--surface2); border-radius: 4px; overflow: hidden; }
 .progress-fill { height: 100%; background: var(--green); border-radius: 4px; transition: width 1s cubic-bezier(.4,0,.2,1); width: 0%; }
 .progress-sub { font-size: 12px; color: var(--text3); margin-top: .5rem; }
-
-/* FICHES GRID */
-.fiches-title {
-  font-size: 13px; font-weight: 600; color: var(--text2);
-  letter-spacing: .06em; text-transform: uppercase;
-  margin-bottom: 1rem;
-}
-
-.fiches-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 12px;
-  margin-bottom: 2rem;
-}
-
-.fiche-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--rl);
-  padding: 1.25rem;
-  display: flex; flex-direction: column; gap: 10px;
-  transition: all .2s;
-  cursor: pointer;
-  text-decoration: none;
-  position: relative;
-  overflow: hidden;
-}
+.fiches-title { font-size: 13px; font-weight: 600; color: var(--text2); letter-spacing: .06em; text-transform: uppercase; margin-bottom: 1rem; }
+.fiches-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; margin-bottom: 2rem; }
+.fiche-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--rl); padding: 1.25rem; display: flex; flex-direction: column; gap: 10px; transition: all .2s; cursor: pointer; text-decoration: none; position: relative; overflow: hidden; }
 .fiche-card:hover { border-color: var(--navy); transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,.08); }
 .fiche-card.done { border-color: var(--green-m); }
 .fiche-card.done::before { content:''; position:absolute;top:0;left:0;right:0;height:3px;background:var(--green); }
 .fiche-card.encours::before { content:''; position:absolute;top:0;left:0;right:0;height:3px;background:var(--amber); }
-
 .fiche-card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
 .fiche-theme { font-size: 13px; font-weight: 600; color: var(--text); line-height: 1.3; }
-.fiche-niveau-tag {
-  font-size: 10px; font-weight: 600; padding: 3px 8px;
-  border-radius: 4px; white-space: nowrap; flex-shrink: 0;
-}
+.fiche-niveau-tag { font-size: 10px; font-weight: 600; padding: 3px 8px; border-radius: 4px; white-space: nowrap; flex-shrink: 0; }
 .n6 { background: #F3E8FF; color: #6B21A8; }
 .n5 { background: var(--blue-l); color: var(--blue); }
 .n4 { background: #F0FDFA; color: #0F766E; }
 .n3 { background: var(--amber-l); color: var(--amber); }
-
 .fiche-statut { display: flex; align-items: center; gap: 6px; }
 .statut-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
 .statut-txt { font-size: 11px; font-weight: 500; }
@@ -181,61 +92,28 @@ body { font-family: 'Sora', sans-serif; background: var(--bg); color: var(--text
 .s-echec .statut-dot { background: var(--red); }
 .s-echec .statut-txt { color: var(--red); }
 @keyframes pulse { 0%,100%{opacity:1;}50%{opacity:.3;} }
-
 .fiche-score { font-size: 11px; color: var(--text3); font-family: 'JetBrains Mono', monospace; }
-
-.fiche-btn {
-  display: flex; align-items: center; justify-content: center; gap: 6px;
-  background: var(--navy); color: #fff;
-  padding: 8px; border-radius: var(--r);
-  font-size: 12px; font-weight: 500;
-  text-decoration: none;
-  transition: background .15s;
-  margin-top: 4px;
-}
+.fiche-btn { display: flex; align-items: center; justify-content: center; gap: 6px; background: var(--navy); color: #fff; padding: 8px; border-radius: var(--r); font-size: 12px; font-weight: 500; text-decoration: none; transition: background .15s; margin-top: 4px; }
 .fiche-btn:hover { background: #142248; }
 .fiche-btn.done-btn { background: var(--green-l); color: var(--green); }
 .fiche-btn.done-btn:hover { background: var(--green-m); }
-
-/* AUCUNE LACUNE */
-.no-lacune {
-  background: var(--green-l);
-  border: 1px solid var(--green-m);
-  border-radius: var(--rl);
-  padding: 2.5rem 2rem;
-  text-align: center;
-}
+.no-lacune { background: var(--green-l); border: 1px solid var(--green-m); border-radius: var(--rl); padding: 2.5rem 2rem; text-align: center; }
 .no-lacune-icon { font-size: 36px; margin-bottom: 1rem; }
 .no-lacune-title { font-size: 20px; font-weight: 600; color: var(--green); margin-bottom: .4rem; }
 .no-lacune-sub { font-size: 14px; color: #0f4a38; }
-
-/* LOADING */
-.loading {
-  display: none;
-  min-height: 100vh;
-  align-items: center; justify-content: center;
-  flex-direction: column; gap: 1rem;
-}
-.spinner {
-  width: 36px; height: 36px;
-  border: 3px solid var(--border);
-  border-top-color: var(--navy);
-  border-radius: 50%;
-  animation: spin .7s linear infinite;
-}
+.loading { display: none; min-height: 100vh; align-items: center; justify-content: center; flex-direction: column; gap: 1rem; }
+.spinner { width: 36px; height: 36px; border: 3px solid var(--border); border-top-color: var(--navy); border-radius: 50%; animation: spin .7s linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
 .loading-txt { font-size: 13px; color: var(--text3); }
 </style>
 </head>
 <body>
 
-<!-- LOADING -->
 <div class="loading" id="loading">
   <div class="spinner"></div>
   <div class="loading-txt">Chargement de tes fiches...</div>
 </div>
 
-<!-- LOGIN -->
 <div class="login-wrap" id="login-wrap">
   <div class="login-card">
     <div class="login-logo">R</div>
@@ -248,9 +126,7 @@ body { font-family: 'Sora', sans-serif; background: var(--bg); color: var(--text
   </div>
 </div>
 
-<!-- DASHBOARD -->
 <div class="dashboard" id="dashboard">
-
   <div class="dash-header">
     <div class="dash-header-left">
       <div class="dash-logo">R</div>
@@ -261,46 +137,27 @@ body { font-family: 'Sora', sans-serif; background: var(--bg); color: var(--text
     </div>
     <div class="dash-user" onclick="deconnexion()">← Changer de compte</div>
   </div>
-
   <div class="dash-main">
-
-    <!-- HERO -->
     <div class="eleve-hero">
       <div class="eleve-info">
         <div class="eleve-name" id="eleve-name">—</div>
         <div class="eleve-meta" id="eleve-meta">—</div>
       </div>
       <div class="eleve-stats">
-        <div class="estat">
-          <div class="estat-val" id="stat-total">—</div>
-          <div class="estat-lbl">Fiches à faire</div>
-        </div>
-        <div class="estat">
-          <div class="estat-val" style="color:var(--green);" id="stat-validees">—</div>
-          <div class="estat-lbl">Validées</div>
-        </div>
-        <div class="estat">
-          <div class="estat-val" style="color:var(--red);" id="stat-alertes">—</div>
-          <div class="estat-lbl">Bloquées</div>
-        </div>
+        <div class="estat"><div class="estat-val" id="stat-total">—</div><div class="estat-lbl">Fiches à faire</div></div>
+        <div class="estat"><div class="estat-val" style="color:var(--green);" id="stat-validees">—</div><div class="estat-lbl">Validées</div></div>
+        <div class="estat"><div class="estat-val" style="color:var(--red);" id="stat-alertes">—</div><div class="estat-lbl">Bloquées</div></div>
       </div>
     </div>
-
-    <!-- PROGRESSION -->
     <div class="progress-panel" id="progress-panel" style="display:none;">
       <div class="progress-panel-header">
         <div class="progress-panel-title">Ta progression globale</div>
         <div class="progress-panel-pct" id="progress-pct">0%</div>
       </div>
-      <div class="progress-track">
-        <div class="progress-fill" id="progress-fill"></div>
-      </div>
+      <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
       <div class="progress-sub" id="progress-sub">—</div>
     </div>
-
-    <!-- FICHES -->
     <div id="fiches-section"></div>
-
   </div>
 </div>
 
@@ -335,7 +192,6 @@ var FICHES_LIENS = {
 var currentEmail = "";
 var currentData = null;
 
-// Appui sur Entrée
 document.getElementById('login-email').addEventListener('keydown', function(e) {
   if (e.key === 'Enter') connexion();
 });
@@ -378,7 +234,6 @@ function afficherDashboard(data) {
   var lacunes = data.lacunes || [];
   var fiches = data.fiches || [];
 
-  // Nom élève depuis le Sheet
   var prenom = data.prenom || "";
   var nom = data.nom || "";
   var classe = data.classe || "";
@@ -386,7 +241,6 @@ function afficherDashboard(data) {
   document.getElementById('eleve-meta').textContent = 'Lycée Benoit Fourneyron · ' + classe;
   document.getElementById('dash-etablissement').textContent = 'Lycée Benoit Fourneyron';
 
-  // Stats
   var total = lacunes.length;
   var validees = fiches.filter(function(f) { return f.statut === 'valide'; }).length;
   var alertes = fiches.filter(function(f) { return f.statut === 'echec_3_tentatives'; }).length;
@@ -394,7 +248,6 @@ function afficherDashboard(data) {
   document.getElementById('stat-validees').textContent = validees || '0';
   document.getElementById('stat-alertes').textContent = alertes || '0';
 
-  // Progression
   if (total > 0) {
     var pct = Math.round(validees / total * 100);
     document.getElementById('progress-panel').style.display = 'block';
@@ -405,7 +258,6 @@ function afficherDashboard(data) {
     document.getElementById('progress-sub').textContent = validees + ' fiche' + (validees > 1 ? 's validées' : ' validée') + ' sur ' + total + ' à faire';
   }
 
-  // Section fiches
   var section = document.getElementById('fiches-section');
 
   if (total === 0) {
@@ -413,7 +265,6 @@ function afficherDashboard(data) {
     return;
   }
 
-  // Construire map statuts
   var statutsMap = {};
   fiches.forEach(function(f) {
     if (!statutsMap[f.fiche_id] || f.tentative_num > (statutsMap[f.fiche_id].tentative_num || 0)) {
@@ -421,7 +272,6 @@ function afficherDashboard(data) {
     }
   });
 
-  // Grouper par thème
   var themes = {};
   lacunes.forEach(function(lacune) {
     var parts = lacune.split('_');
@@ -436,7 +286,17 @@ function afficherDashboard(data) {
     html += '<div class="fiches-title">' + theme + '</div>';
     html += '<div class="fiches-grid">';
     themes[theme].forEach(function(item) {
-      var lien = FICHES_LIENS[item.lacune] || '#';
+
+      // ── MODIFICATION : ajout email + infos élève dans le lien ──
+      var lienBase = FICHES_LIENS[item.lacune] || '#';
+      var lien = lienBase
+        + '?nom='       + encodeURIComponent((data.prenom || '') + ' ' + (data.nom || ''))
+        + '&classe='    + encodeURIComponent(data.classe || '')
+        + '&lycee='     + encodeURIComponent('Lycée Benoît Fourneyron')
+        + '&email='     + encodeURIComponent(currentEmail)
+        + '&prof=Reydellet'
+        + '&prof_email='+ encodeURIComponent('ar.reydellet@gmail.com');
+
       var ficheData = statutsMap[item.lacune] || null;
       var statut = ficheData ? ficheData.statut : 'todo';
       var score = ficheData && ficheData.score_quiz ? ficheData.score_quiz + '/5' : null;
