@@ -1,435 +1,281 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mon espace remédiation</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>Stud'Éval · Mes résultats · Espace élève 6e</title>
 <style>
-:root {
-  --bg: #F7F6F2;
-  --surface: #FFFFFF;
-  --surface2: #F0EFE9;
-  --border: #E2E0D8;
-  --text: #1A1917;
-  --text2: #6B6960;
-  --text3: #A8A69E;
-  --green: #1A7A5E;
-  --green-l: #E3F4EE;
-  --green-m: #A8DCC8;
-  --amber: #B8610A;
-  --amber-l: #FEF3E2;
-  --red: #B52A2A;
-  --red-l: #FDEAEA;
-  --blue: #1A4FA0;
-  --blue-l: #EBF0FA;
-  --navy: #1A2C5B;
-  --r: 10px; --rl: 16px;
-}
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: 'Sora', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+:root{--blue:#3163f4;--blue-dark:#194de0;--blue-light:#ebf0ff;--blue-border:#cbd9ff;--background:#f5f7fc;--white:#fff;--ink:#172646;--secondary:#51648b;--muted:#7383a4;--line:#dbe5f7;--green:#00a17d;--green-bg:#e7f8f1;--orange:#de7920;--orange-bg:#fff3e5;--red:#d74a64;--red-bg:#fff0f3;--indigo:#5456cd;--shadow:0 2px 13px rgba(49,99,244,.035);--r:16px}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--background);color:var(--ink);font:14px/1.52 -apple-system,BlinkMacSystemFont,"Inter","Segoe UI",Arial,sans-serif;-webkit-font-smoothing:antialiased}
+button,select{font:inherit}button{cursor:pointer}
+button:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #82a3ff;outline-offset:3px}
+button:disabled{cursor:default;opacity:.5}
+a{color:inherit}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.icon{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.icon.small{width:16px;height:16px}.icon.large{width:27px;height:27px}
+.shell{min-height:100vh;display:grid;grid-template-columns:258px minmax(0,1fr)}
+.nav{background:#fff;border-right:1px solid #e2e9f8;display:flex;flex-direction:column;min-height:100vh;position:sticky;top:0;max-height:100vh;padding:25px 11px 13px}
+.nav-brand{padding:0 10px 25px}.logo{display:flex;align-items:center;gap:3px;color:var(--blue);font-size:27px;font-weight:820;line-height:1;letter-spacing:-1px;white-space:nowrap}
+.logo-bars{display:flex;align-items:flex-end;gap:2px;height:22px;margin-right:1px}.logo-bars i{display:block;width:4px;background:#3e75ff;border-radius:3px}.logo-bars i:nth-child(1){height:8px;opacity:.57}.logo-bars i:nth-child(2){height:15px;opacity:.77}.logo-bars i:nth-child(3){height:22px}
+.school{font-size:11px;color:#6a7b9c;margin-top:11px;line-height:1.5}.school-caption{font-size:10px;margin-top:3px;color:#8b9ab6}
+.menu{display:grid;gap:6px}.navlink{display:flex;align-items:center;gap:12px;padding:12px 10px;border-radius:11px;background:transparent;color:#263c66;border:0;width:100%;text-align:left;font-weight:660;font-size:14px;line-height:1.24}
+.navlink .nav-icon{display:grid;place-items:center;background:#edf2ff;color:var(--blue);width:32px;height:32px;border-radius:9px;flex:none}.navlink.active{background:var(--blue);color:#fff;box-shadow:0 5px 13px rgba(49,99,244,.16)}.navlink.active .nav-icon{background:#ffffff24;color:#fff}.navlink:not(.active){cursor:default}
+.nav-bottom{margin-top:auto;border-top:1px solid var(--line);padding-top:12px}.account{display:flex;align-items:center;gap:10px;background:#f2f6ff;border:1px solid #d3e0ff;border-radius:13px;padding:10px 8px}.initials{display:grid;place-items:center;width:34px;height:34px;border-radius:10px;background:#dce8ff;color:var(--blue);font-size:11px;font-weight:800;flex:none}.account-name{font-size:12px;font-weight:750;line-height:1.15}.account-role{font-size:10px;color:#64769a;margin-top:3px}
+.main{min-width:0;padding:26px clamp(19px,4.5vw,56px) 44px}.content{max-width:1100px;margin:auto;display:grid;grid-template-columns:minmax(0,1fr);min-width:0;gap:20px}
+.demo-panel{min-width:0;border:1px dashed #b7c8f0;background:#fcfdff;border-radius:14px;padding:13px 15px 14px;box-shadow:var(--shadow)}
+.demo-head{display:flex;align-items:center;justify-content:space-between;gap:10px}.demo-left{display:flex;align-items:center;gap:9px;min-width:0}.demo-tag{background:#eaf0ff;border-radius:7px;color:#2752c0;letter-spacing:.06em;font-size:10px;font-weight:840;padding:5px 7px;white-space:nowrap}.demo-title{font-size:12px;font-weight:700;color:#384e78}.demo-hint{font-size:10px;color:#8391a9;margin-top:1px}
+.text-button{display:inline-flex;align-items:center;gap:6px;background:none;border:0;color:var(--blue-dark);font-size:12px;font-weight:700;padding:5px;white-space:nowrap}.text-button:hover{text-decoration:underline}
+.demo-list{display:flex;max-width:100%;min-width:0;gap:8px;overflow-x:auto;margin-top:12px;padding:2px 1px 9px;scrollbar-width:thin;scrollbar-color:#bed0f7 transparent}.demo-profile{flex:0 0 164px;text-align:left;border:1px solid #dfe7fa;border-radius:10px;background:#fff;padding:9px 10px;min-height:69px}.demo-profile:hover{background:#f6f8ff;border-color:#99b2ef}.demo-profile.selected{background:#eef3ff;border:2px solid var(--blue);padding:8px 9px}.demo-topline{display:flex;justify-content:space-between;gap:4px;align-items:center}.demo-name{font-size:12px;font-weight:780;color:#233a6c}.demo-pct{font-size:11px;color:#3262dd;font-weight:760}.demo-sub{font-size:10px;color:#7382a2;line-height:1.3;margin-top:3px}
+.mobile-head{display:none}
+.year-strip{display:flex;justify-content:space-between;align-items:center;gap:16px;background:#fff;border:1px solid var(--line);border-radius:14px;min-height:66px;padding:14px 21px;color:#203255;box-shadow:var(--shadow)}.year-title{display:flex;align-items:center;gap:12px;font-size:15px;font-weight:750}.year-title .icon{color:var(--blue)}.year-details{color:#6d80a5;font-size:12px;font-weight:450;margin-left:7px}.year-pill{padding:8px 15px;border:1px solid #cad7ef;color:#435a86;border-radius:30px;font-weight:670;font-size:12px}
+.heading{padding:24px 25px;border:1px solid #cbd9ff;border-left:5px solid var(--blue);border-radius:16px;background:#edf2ff;display:flex;gap:16px;align-items:center;min-height:113px}.heading-icon{display:grid;place-items:center;color:var(--blue);background:#fff;border:1px solid #cfdbff;border-radius:17px;width:55px;height:55px;flex:none}.heading h1{font-size:26px;letter-spacing:-.035em;line-height:1.13;color:#204de0;margin:0 0 6px}.heading p{margin:0;color:#556d9d;font-size:13px}
+.student-topline{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:-1px 2px -6px}.student-name-top{font-size:15px;font-weight:750;color:#2552d4}.student-session{font-size:11px;color:#7384a3}
+[hidden]{display:none!important}.card{background:#fff;border:1px solid #d7e2ff;border-radius:17px;padding:22px;box-shadow:var(--shadow)}
+.result-overview{display:grid;grid-template-columns:170px minmax(0,1fr);align-items:center;gap:21px;padding:24px 27px}
+.donut{width:146px;height:146px;position:relative;display:grid;place-items:center}.donut svg{position:absolute;width:146px;height:146px;transform:rotate(-90deg)}.donut-track{fill:none;stroke:#e5ecf7;stroke-width:12}.donut-fill{fill:none;stroke-width:12;stroke-linecap:round;transition:stroke-dashoffset .3s}.donut-label{position:relative;text-align:center}.donut-label strong{font-size:33px;font-weight:820;letter-spacing:-.055em;color:#18375b;display:block;line-height:1}.donut-label span{display:block;margin-top:7px;font-size:10px;color:#8796ae}
+.overview-text h2{font-size:21px;line-height:1.25;margin:2px 0 10px;letter-spacing:-.02em}.overview-text p{margin:0;color:#5d7094;font-size:13px;max-width:720px}.overview-meta{margin-top:17px;display:flex;gap:0;align-items:center;border-top:1px solid #e4eaf8;padding-top:13px}.overview-meta > div{display:flex;align-items:baseline;gap:7px;padding-right:23px;margin-right:22px;border-right:1px solid #dae3f7}.overview-meta > div:last-child{border:0}.overview-meta strong{font-size:19px;color:var(--blue);line-height:1}.overview-meta span{font-size:11px;color:#8090ae}.result-note{display:inline-flex;align-items:center;gap:6px;color:#2a5877;font-size:11px;margin-top:11px}
+.section-head{display:flex;justify-content:space-between;align-items:flex-start;gap:13px;margin-bottom:19px}.section-left{display:flex;align-items:flex-start;gap:11px}.step-no{background:#e9efff;color:#2956df;width:33px;height:33px;display:grid;place-items:center;border-radius:10px;font-weight:840;font-size:15px;flex:none}.section-head h2{font-size:18px;font-weight:775;letter-spacing:-.015em;line-height:1.32;margin:0 0 4px;color:#2053df}.section-head p{font-size:12px;color:#7487a8;margin:0}.section-mini{font-size:11px;color:#7284a6;white-space:nowrap;margin-top:5px}
+.socles{display:grid;grid-template-columns:1fr 1fr;gap:12px}.socle{border:1px solid #dbe4fa;border-radius:12px;padding:18px;text-align:left;background:#fff;min-width:0;transition:background-color .16s,border-color .16s}.socle:hover,.family:hover{background:#f8faff;border-color:#a6befa}.socle.selected{border:2px solid var(--blue);padding:17px;background:#f0f4ff;box-shadow:0 3px 9px #3c69f314}.socle-line{display:flex;align-items:flex-start;justify-content:space-between;gap:9px}.socle h3{font-size:16px;margin:0 0 3px}.socle .sub{font-size:11px;color:#7789ab}.socle-number{font-size:26px;line-height:1.15;font-weight:820;letter-spacing:-.05em;font-variant-numeric:tabular-nums;color:#2d548a}.progress{height:7px;background:#e7edf8;border-radius:100px;overflow:hidden;position:relative;margin:14px 0 9px}.progress > i{display:block;height:100%;width:0;border-radius:100px;transition:width .2s ease;background:var(--green)}.socle-meta{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:11px;color:#8190aa}.status{font-size:10px;font-weight:790;border-radius:6px;padding:4px 7px;white-space:nowrap}.status.ok{background:#e9efff;color:#394fd0}.status.focus{background:#fff1e3;color:#a76827}.status.low{background:#fff0f2;color:#b64c5b}.status.acquiring{background:#e5f8f0;color:#008c6c}.status.good{background:#ebedff;color:#4e55ba}.status.mix{background:#f2f4fa;color:#5f7092}
+.insight-strip{flex-wrap:wrap;border-radius:11px;background:#eef3ff;padding:13px 15px;margin-top:15px;display:flex;align-items:flex-start;gap:10px;color:#2a4575;font-size:12px;line-height:1.55}.insight-strip svg{color:var(--blue);flex:none;margin-top:2px}.insight-strip strong{color:#223a68}
+.family-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.family{text-align:left;background:#fff;border:1px solid #dbe4f9;border-radius:12px;padding:16px;min-width:0}.family.active{border:2px solid var(--blue);padding:15px;background:#f0f4ff}.family-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}.family h3{font-size:13px;font-weight:760;line-height:1.32;margin:0;color:#253a66;max-width:285px}.family-pct{font-weight:820;color:#213a67;font-size:20px;line-height:1.1;letter-spacing:-.035em;flex:none}.family-desc{color:#7e8eae;font-size:10px;margin-top:7px;min-height:26px;line-height:1.35}.family-bottom{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:10px;color:#8192ad}.family .progress{margin:12px 0 8px;height:6px}.family-selec{color:#2b56d3;font-weight:750}
+.family-info{font-size:11px;color:#7689a7;margin:12px 1px 0;line-height:1.5}.family-info svg{width:13px;height:13px;vertical-align:-2px;margin-right:5px}
+.stop{display:flex;align-items:flex-start;gap:13px;background:#eef8f4;border:1px solid #c5e8d9;border-radius:12px;padding:17px}.stop-icon{display:grid;place-items:center;border-radius:50%;width:31px;height:31px;background:#d4f2e4;color:#008768;font-size:17px;font-weight:760;flex:none}.stop h3{margin:0 0 5px;font-size:15px}.stop p{font-size:12px;color:#4e746d;margin:0 0 11px}.action-btn{display:inline-flex;align-items:center;gap:8px;background:var(--blue);color:#fff;font-size:12px;font-weight:720;border:1px solid var(--blue);border-radius:8px;padding:9px 13px;box-shadow:0 2px 6px #3568ed2e}.action-btn:hover{background:#2452d9}
+.analysis{border-radius:13px;border:1px solid #dbe5f7;overflow:hidden}.analysis-main{padding:19px 20px 18px}.analysis-type{display:inline-flex;align-items:center;gap:7px;font-size:11px;font-weight:790;color:#a66a27;background:#fff2e4;border-radius:7px;padding:5px 8px;margin-bottom:10px}.analysis-type.structural{background:#fff1e5;color:#af6923}.analysis-type.cible{background:#ebf1ff;color:#2b55d3}.analysis-type.incertain{background:#f1f3f8;color:#61728e}.analysis-type.contraste{background:#f3efff;color:#6252b2}.analysis-type.ok{background:#e7f7f0;color:#128164}.analysis-main h3{font-size:18px;letter-spacing:-.022em;line-height:1.38;margin:0 0 8px}.analysis-main p{font-size:13px;color:#5c6f91;line-height:1.65;margin:0;max-width:850px}.analysis-next{background:#f6f8fe;border-top:1px solid #e2e9f9;padding:18px 20px}.analysis-next h4{color:#214ddb;margin:0 0 11px;font-size:14px}.action-list{display:grid;gap:9px}.action-item{display:flex;align-items:flex-start;gap:10px;background:#fff;border:1px solid #e5ebf8;padding:11px 12px;border-radius:9px;font-size:12px;line-height:1.5;color:#2a3f66}.action-num{display:grid;place-items:center;color:var(--blue);background:#e8efff;font-weight:820;width:23px;height:23px;min-width:23px;border-radius:7px;font-size:11px}
+.evidence{margin-top:15px;border-top:1px solid #e1e9f6;padding-top:12px}.evidence summary{font-size:11px;font-weight:740;color:#315cce;cursor:pointer;list-style:inside}.evidence-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:11px}.evidence-item{background:#fff;border:1px solid #e5ebf8;border-radius:8px;padding:10px;min-height:95px}.evidence-item.good{border-left:3px solid #099f7d}.evidence-item.bad{border-left:3px solid #d57a29}.evidence-status{font-size:10px;font-weight:730;color:#64799c}.evidence-item.good .evidence-status{color:#00896c}.evidence-item.bad .evidence-status{color:#b46a2d}.evidence-item p{margin:5px 0 0;font-size:11px;line-height:1.5;color:#435779}.evidence-note{font-size:10px;color:#8a99b1;margin:8px 0 0}
+.end-synth{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;background:#fff;border:1px solid #d5e2fc;border-radius:14px;padding:18px 20px}.end-synth h2{color:#2053df;font-size:15px;margin:0 0 5px}.end-synth p{font-size:12px;color:#607395;margin:0;max-width:750px;line-height:1.55}.end-synth .icon{color:#3265ef}
+.footer{font-size:11px;color:#8796b3;display:flex;justify-content:space-between;gap:14px;align-items:flex-start;margin:0 4px}.footer small{font-size:10px}
+@media(max-width:1190px){.main{padding:24px 27px 40px}.shell{grid-template-columns:232px minmax(0,1fr)}.nav{padding-left:8px;padding-right:8px}.year-details{display:block;margin:1px 0 0}.year-title{align-items:flex-start}.result-overview{grid-template-columns:146px 1fr;gap:16px}}
+@media(max-width:870px){.shell{display:block}.nav{display:none}.mobile-head{display:flex;background:#fff;border-bottom:1px solid #dce5f8;align-items:center;justify-content:space-between;gap:12px;padding:14px 20px}.mobile-head .logo{font-size:21px}.mobile-head .logo-bars{transform:scale(.8);transform-origin:left center;width:27px}.mobile-head-title{color:#617398;font-size:11px;font-weight:760}.main{padding:22px 20px 30px}.content{gap:15px}}
+@media(max-width:620px){.main{padding:14px 11px 30px}.content{gap:12px}.heading{padding:17px;min-height:91px;gap:11px}.heading h1{font-size:22px}.heading p{font-size:11px}.heading-icon{width:41px;height:41px;border-radius:12px}.heading-icon .icon{width:23px;height:23px}.year-strip{padding:11px 13px;min-height:57px}.year-title{font-size:12px;gap:8px}.year-details{font-size:10px}.year-pill{display:none}.demo-panel{padding:11px 10px}.demo-title{font-size:11px}.demo-hint{display:none}.demo-tag{font-size:9px}.demo-profile{flex-basis:148px}.student-topline{align-items:flex-start;flex-direction:column;gap:0}.student-name-top{font-size:13px}.student-session{font-size:10px}.card{padding:17px 14px;border-radius:13px}.result-overview{grid-template-columns:108px 1fr;gap:8px;padding:16px 13px}.donut,.donut svg{width:104px;height:104px}.donut-label strong{font-size:25px}.donut-label span{font-size:9px}.overview-text h2{font-size:15px}.overview-text p{font-size:11px}.overview-meta{margin-top:8px;padding-top:8px}.overview-meta > div{display:grid;gap:0;padding-right:9px;margin-right:9px}.overview-meta strong{font-size:15px}.overview-meta span{font-size:9px}.section-head{margin-bottom:14px}.section-head h2{font-size:16px}.section-head p{font-size:11px}.section-mini{display:none}.socles,.family-grid{grid-template-columns:1fr;gap:9px}.socle{padding:14px}.socle.selected{padding:13px}.socle-number{font-size:24px}.family{padding:13px}.family.active{padding:12px}.family-desc{min-height:0}.family-bottom{font-size:10px}.evidence-list{grid-template-columns:1fr}.analysis-main,.analysis-next{padding:15px}.analysis-main h3{font-size:16px}.analysis-main p{font-size:12px}.end-synth{padding:15px}.footer{display:block}.footer span{display:block;margin-bottom:3px}}
+@media print{.nav,.mobile-head,.demo-panel,.year-strip,.footer,.end-synth,.text-button{display:none!important}.shell{display:block}.main{padding:0}.content{max-width:none;gap:10px}.card,.heading{break-inside:avoid;box-shadow:none}.socle,.family,.status,.progress>i,.analysis-type,.action-item{-webkit-print-color-adjust:exact;print-color-adjust:exact}button{cursor:default}}
 
-/* ── LOGIN ── */
-.login-wrap { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 2rem; }
-.login-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--rl); padding: 2.5rem; width: 100%; max-width: 420px; box-shadow: 0 4px 24px rgba(0,0,0,.06); animation: fadeUp .4s ease; }
-@keyframes fadeUp { from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);} }
-.login-logo { width: 44px; height: 44px; border-radius: 12px; background: var(--navy); display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 1.5rem; }
-.login-title { font-size: 22px; font-weight: 600; margin-bottom: .4rem; }
-.login-sub { font-size: 13px; color: var(--text2); margin-bottom: 2rem; line-height: 1.55; }
-.login-label { font-size: 12px; font-weight: 500; color: var(--text2); margin-bottom: .4rem; display: block; }
-.login-input { width: 100%; height: 44px; padding: 0 14px; border: 1.5px solid var(--border); border-radius: var(--r); font-family: 'Sora', sans-serif; font-size: 14px; color: var(--text); background: var(--surface2); outline: none; transition: border-color .2s, background .2s; margin-bottom: 1rem; }
-.login-input:focus { border-color: var(--navy); background: var(--surface); }
-.login-err { font-size: 12px; color: var(--red); margin-bottom: .75rem; display: none; }
-.btn-login { width: 100%; height: 44px; background: var(--navy); color: #fff; border: none; border-radius: var(--r); font-family: 'Sora', sans-serif; font-size: 14px; font-weight: 500; cursor: pointer; transition: all .15s; }
-.btn-login:hover { background: #142248; transform: translateY(-1px); }
-.btn-login:active { transform: scale(.98); }
-.btn-login:disabled { background: #8a9fc5; cursor: not-allowed; transform: none; }
-
-/* ── DASHBOARD ── */
-.dashboard { display: none; min-height: 100vh; }
-.dash-header { background: var(--navy); padding: 1.25rem 2rem; display: flex; align-items: center; justify-content: space-between; }
-.dash-header-left { display: flex; align-items: center; gap: 14px; }
-.dash-logo { width: 36px; height: 36px; border-radius: 9px; background: rgba(255,255,255,.12); display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 700; color: #fff; }
-.dash-title { font-size: 15px; font-weight: 600; color: #fff; }
-.dash-sub { font-size: 11px; color: rgba(255,255,255,.45); margin-top: 1px; }
-.dash-user { font-size: 12px; color: rgba(255,255,255,.5); cursor: pointer; transition: color .15s; }
-.dash-user:hover { color: rgba(255,255,255,.85); }
-.dash-main { padding: 2rem; max-width: 900px; margin: 0 auto; }
-
-/* ── HERO ── */
-.eleve-hero { background: var(--surface); border: 1px solid var(--border); border-radius: var(--rl); padding: 1.75rem 2rem; margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
-.eleve-name { font-size: 22px; font-weight: 600; letter-spacing: -.3px; margin-bottom: 3px; }
-.eleve-meta { font-size: 13px; color: var(--text2); }
-.eleve-stats { display: flex; gap: 1.5rem; }
-.estat { text-align: center; }
-.estat-val { font-size: 28px; font-weight: 600; font-family: 'JetBrains Mono', monospace; color: var(--navy); line-height: 1; }
-.estat-lbl { font-size: 10px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--text3); margin-top: 4px; }
-
-/* ── PROGRESSION ── */
-.progress-panel { background: var(--surface); border: 1px solid var(--border); border-radius: var(--rl); padding: 1.5rem 2rem; margin-bottom: 2rem; }
-.progress-panel-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
-.progress-panel-title { font-size: 14px; font-weight: 600; }
-.progress-panel-pct { font-size: 20px; font-weight: 600; font-family: 'JetBrains Mono', monospace; color: var(--green); }
-.progress-track { height: 8px; background: var(--surface2); border-radius: 4px; overflow: hidden; }
-.progress-fill { height: 100%; background: var(--green); border-radius: 4px; transition: width 1s cubic-bezier(.4,0,.2,1); width: 0%; }
-.progress-sub { font-size: 12px; color: var(--text3); margin-top: .5rem; }
-
-/* ── SECTIONS THÉMATIQUES ── */
-.theme-section { margin-bottom: 2.5rem; }
-.theme-header { display: flex; align-items: center; gap: 12px; margin-bottom: 1rem; }
-.theme-icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 15px; flex-shrink: 0; }
-.theme-title { font-size: 13px; font-weight: 600; color: var(--text2); letter-spacing: .06em; text-transform: uppercase; }
-.theme-count { font-size: 11px; color: var(--text3); font-family: 'JetBrains Mono', monospace; }
-
-/* couleurs des icônes par thème */
-.ic-fractions    { background: #EEF2FF; }
-.ic-propor       { background: #FFF7ED; }
-.ic-litteral     { background: #F0FDF4; }
-.ic-fonctions    { background: #EFF6FF; }
-.ic-geometrie    { background: #FDF4FF; }
-.ic-nombres      { background: #FFFBEB; }
-.ic-stats        { background: #FFF1F2; }
-
-/* ── GRILLE FICHES ── */
-.fiches-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; }
-
-/* ── CARTE FICHE ── */
-.fiche-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--rl); padding: 1.25rem; display: flex; flex-direction: column; gap: 10px; transition: all .2s; position: relative; overflow: hidden; }
-.fiche-card.active { cursor: pointer; }
-.fiche-card.active:hover { border-color: var(--navy); transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,.08); }
-.fiche-card.done { border-color: var(--green-m); }
-.fiche-card.done::before { content:''; position:absolute;top:0;left:0;right:0;height:3px;background:var(--green); }
-.fiche-card.encours::before { content:''; position:absolute;top:0;left:0;right:0;height:3px;background:var(--amber); }
-.fiche-card.bientot { opacity: .6; }
-
-.fiche-theme { font-size: 13px; font-weight: 600; color: var(--text); line-height: 1.35; }
-.fiche-statut { display: flex; align-items: center; gap: 6px; }
-.statut-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
-.statut-txt { font-size: 11px; font-weight: 500; }
-.s-todo .statut-dot { background: var(--text3); }
-.s-todo .statut-txt { color: var(--text3); }
-.s-encours .statut-dot { background: var(--amber); animation: pulse .8s infinite; }
-.s-encours .statut-txt { color: var(--amber); }
-.s-valide .statut-dot { background: var(--green); }
-.s-valide .statut-txt { color: var(--green); }
-.s-echec .statut-dot { background: var(--red); }
-.s-echec .statut-txt { color: var(--red); }
-.s-bientot .statut-dot { background: var(--text3); }
-.s-bientot .statut-txt { color: var(--text3); font-style: italic; }
-@keyframes pulse { 0%,100%{opacity:1;}50%{opacity:.3;} }
-
-.fiche-score { font-size: 11px; color: var(--text3); font-family: 'JetBrains Mono', monospace; }
-
-.fiche-btn { display: flex; align-items: center; justify-content: center; gap: 6px; background: var(--navy); color: #fff; padding: 9px; border-radius: var(--r); font-size: 12px; font-weight: 500; text-decoration: none; transition: background .15s; margin-top: 4px; }
-.fiche-btn:hover { background: #142248; }
-.fiche-btn.done-btn { background: var(--green-l); color: var(--green); }
-.fiche-btn.done-btn:hover { background: var(--green-m); }
-.fiche-btn.bientot-btn { background: var(--surface2); color: var(--text3); cursor: default; pointer-events: none; }
-
-/* ── LOADING ── */
-.loading { display: none; min-height: 100vh; align-items: center; justify-content: center; flex-direction: column; gap: 1rem; }
-.spinner { width: 36px; height: 36px; border: 3px solid var(--border); border-top-color: var(--navy); border-radius: 50%; animation: spin .7s linear infinite; }
-@keyframes spin { to { transform: rotate(360deg); } }
-.loading-txt { font-size: 13px; color: var(--text3); }
+/* — V2 : hiérarchie visuelle des deux niveaux, côte à côte — */
+.socles{grid-template-columns:minmax(0,1.08fr) minmax(0,1fr);gap:13px;align-items:stretch}
+.socle{display:flex;flex-direction:column;position:relative;min-height:216px;padding:16px 18px 14px;border:2px solid #dfe7f6;border-radius:14px;transition:border-color .15s,background-color .15s,box-shadow .15s}
+.socle.is-foundation{background:linear-gradient(145deg,#f0f4ff 0%,#f8faff 65%,#ffffff 100%);border-color:#adc5ff;box-shadow:inset 4px 0 0 #3163f4,0 3px 12px rgba(39,88,206,.045)}
+.socle.is-consolidation{background:#fff;border-color:#e1e8f8}
+.socle.selected{padding:16px 18px 14px;border:2px solid var(--blue);background-color:#f0f4ff;box-shadow:0 4px 13px rgba(49,99,244,.10)}
+.socle.is-foundation.selected{background:linear-gradient(145deg,#edf2ff 0%,#f9fbff 100%);box-shadow:inset 4px 0 0 #3163f4,0 4px 13px rgba(49,99,244,.10)}
+.socle.is-consolidation.selected{background:#f4f7ff;box-shadow:0 4px 13px rgba(49,99,244,.07)}
+.socle:hover{border-color:#78a0f6}
+.socle-top{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:16px}
+.socle-stage{display:inline-flex;align-items:center;gap:8px;font-size:10px;font-weight:850;letter-spacing:.04em;color:#2155cc}
+.socle-stage-num{width:26px;height:26px;flex:none;display:grid;place-items:center;border-radius:8px;background:#3163f4;color:white;font-size:13px;letter-spacing:0}
+.socle.is-consolidation .socle-stage{color:#7082a5}
+.socle.is-consolidation .socle-stage-num{background:#ecf1fa;color:#64789c}
+.socle-questions{color:#8a9ab4;font-size:10px;font-weight:610;white-space:nowrap}
+.socle-line{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.socle-main-copy{min-width:0}
+.socle h3{font-size:18px;letter-spacing:-.025em;color:#1a3361;line-height:1.27;margin:0}
+.socle.is-consolidation h3{font-size:17px;font-weight:780;color:#30425f}
+.socle .socle-description{margin:7px 0 0;color:#7184a6;font-size:11px;line-height:1.46;max-width:365px}
+.socle.is-foundation .socle-description{color:#536e9e}
+.socle .socle-number{font-size:33px;line-height:1.1;flex:none;color:#2a538d}
+.socle.is-consolidation .socle-number{font-size:29px;color:#42628e}
+.socle .progress{height:8px;margin:14px 0 10px}
+.socle-meta{margin-top:auto;gap:8px;align-items:center}
+.socle-action{display:flex;align-items:center;gap:5px;margin-top:12px;color:#3568da;font-size:10px;font-weight:760}
+.socle.is-consolidation .socle-action{color:#647ba5}
+.socle-action .icon{width:13px;height:13px}
+.socle.is-foundation .socle-action{color:#2157dc}
+.insight-strip{margin-top:15px;border:1px solid #dfe8ff;background:#f0f4fe;padding:13px 15px}
+@media (max-width:1080px) and (min-width:621px){.socle h3{font-size:16px}.socle.is-consolidation h3{font-size:15px}.socle .socle-number{font-size:28px}.socle.is-consolidation .socle-number{font-size:26px}.socle{padding:14px 13px}.socle.selected{padding:14px 13px}}
+@media(max-width:620px){.socles{grid-template-columns:minmax(0,1fr);gap:10px}.socle,.socle.selected{padding:14px 15px;min-height:0}.socle-top{margin-bottom:11px}.socle .progress{margin:11px 0 9px}.socle-action{margin-top:9px}.socle .socle-number{font-size:27px}.socle.is-consolidation .socle-number{font-size:26px}.socle h3,.socle.is-consolidation h3{font-size:16px}.socle .socle-description{font-size:11px}}
+@media print{.socle.is-foundation{border-color:#adc5ff!important}.socle-stage-num{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+/* V3 : formulations pédagogiques des grands domaines — charte graphique inchangée */
+.domain-intro{font-size:12px;color:var(--secondary);line-height:1.65;margin:-2px 0 12px}
+.domain-intro strong{color:var(--ink);font-weight:750}
+.domain-level{display:flex;align-items:flex-start;gap:9px;padding:11px 13px;margin:0 0 15px;background:#f0f4fe;border-radius:10px;color:#344f80;font-size:12px;line-height:1.5}
+.domain-level .icon{color:var(--blue);margin-top:1px}
+.domain-level strong{color:#203b70}
+.family{display:flex;flex-direction:column;gap:0}
+.family .family-desc{margin:9px 0 0;min-height:0;color:#42597f;font-size:11.5px;line-height:1.5}
+.family .family-purpose{margin:8px 0 12px;color:#7586a5;font-size:11.5px;line-height:1.5}
+.family .progress{margin-top:auto;padding-top:0;flex:none}
+@media(max-width:620px){.domain-intro,.domain-level{font-size:11.5px}.family .family-desc,.family .family-purpose{font-size:11px}.family .progress{margin-top:12px}.family .family-purpose{margin-bottom:0}}
 </style>
 </head>
 <body>
-
-<div class="loading" id="loading">
-  <div class="spinner"></div>
-  <div class="loading-txt">Chargement de tes fiches...</div>
-</div>
-
-<div class="login-wrap" id="login-wrap">
-  <div class="login-card">
-    <div class="login-logo">R</div>
-    <div class="login-title">Mon espace remédiation</div>
-    <div class="login-sub">Entre ton adresse email pour accéder à tes fiches de travail personnalisées.</div>
-    <label class="login-label">Adresse email *</label>
-    <input class="login-input" type="email" id="login-email" placeholder="ton.email@exemple.fr" autocomplete="email">
-    <div class="login-err" id="login-err">Email introuvable. Vérifie l'adresse saisie lors du diagnostic.</div>
-    <button class="btn-login" id="btn-login" onclick="connexion()">Accéder à mes fiches →</button>
-  </div>
-</div>
-
-<div class="dashboard" id="dashboard">
-  <div class="dash-header">
-    <div class="dash-header-left">
-      <div class="dash-logo">R</div>
-      <div>
-        <div class="dash-title">Mon espace remédiation</div>
-        <div class="dash-sub" id="dash-etablissement">—</div>
-      </div>
-    </div>
-    <div class="dash-user" onclick="deconnexion()">← Changer de compte</div>
-  </div>
-
-  <div class="dash-main">
-    <!-- HERO -->
-    <div class="eleve-hero">
-      <div>
-        <div class="eleve-name" id="eleve-name">—</div>
-        <div class="eleve-meta" id="eleve-meta">—</div>
-      </div>
-      <div class="eleve-stats">
-        <div class="estat"><div class="estat-val" id="stat-total">—</div><div class="estat-lbl">Fiches à faire</div></div>
-        <div class="estat"><div class="estat-val" style="color:var(--green);" id="stat-validees">—</div><div class="estat-lbl">Validées</div></div>
-        <div class="estat"><div class="estat-val" style="color:var(--red);" id="stat-alertes">—</div><div class="estat-lbl">Bloquées</div></div>
-      </div>
-    </div>
-
-    <!-- PROGRESSION -->
-    <div class="progress-panel" id="progress-panel" style="display:none;">
-      <div class="progress-panel-header">
-        <div class="progress-panel-title">Ta progression globale</div>
-        <div class="progress-panel-pct" id="progress-pct">0%</div>
-      </div>
-      <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
-      <div class="progress-sub" id="progress-sub">—</div>
-    </div>
-
-    <!-- CONTENU FICHES -->
-    <div id="fiches-section"></div>
-  </div>
-</div>
-
+<svg style="display:none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 18v-5M9 18V9M14 18V12M19 18V5M3 21h18M4 9l5-4 5 3 6-6"/></symbol><symbol id="i-home" viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v10H3zM9 20v-7h6v7"/></symbol><symbol id="i-clipboard" viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="17" rx="2"/><path d="M9 5V3h6v2M9 12l2 2 4-4M9 18h6"/></symbol><symbol id="i-book" viewBox="0 0 24 24"><path d="M12 6c-3-2-7-2-10-1v15c3-1 7-1 10 1 3-2 7-2 10-1V5c-3-1-7-1-10 1ZM12 6v15"/></symbol><symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 2v6M16 2v6M3 10h18"/></symbol><symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></symbol><symbol id="i-chevron" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="m4 12 5 5L20 6"/></symbol><symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></symbol><symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 21S3 15 3 8.8C3 3 10 3 12 7c2-4 9-4 9 1.8C21 15 12 21 12 21Z"/></symbol></svg>
+<div class="mobile-head"><div class="logo"><span class="logo-bars"><i></i><i></i><i></i></span>Stud’Éval</div><span class="mobile-head-title">ESPACE ÉLÈVE</span></div>
+<div class="shell">
+<aside class="nav" aria-label="Espace élève">
+<div class="nav-brand"><div class="logo"><span class="logo-bars"><i></i><i></i><i></i></span>Stud’Éval</div><div class="school">Collège de démonstration</div><div class="school-caption">Espace élève · Année 2026-2027</div></div>
+<nav class="menu" aria-label="Navigation principale">
+<div class="navlink"><span class="nav-icon"><svg class="icon"><use href="#i-home"/></svg></span>Accueil</div>
+<div class="navlink"><span class="nav-icon"><svg class="icon"><use href="#i-clipboard"/></svg></span>Mon évaluation</div>
+<div class="navlink active" aria-current="page"><span class="nav-icon"><svg class="icon"><use href="#i-chart"/></svg></span>Mes résultats</div>
+<div class="navlink"><span class="nav-icon"><svg class="icon"><use href="#i-book"/></svg></span>Ma remédiation</div>
+</nav>
+<div class="nav-bottom"><div class="account"><div class="initials" id="menu-initials">CM</div><div><div class="account-name" id="menu-name">Camille Martin</div><div class="account-role">Élève · 6e B</div></div></div></div>
+</aside>
+<main class="main"><div class="content">
+<section class="demo-panel" aria-label="Profils fictifs de démonstration"><div class="demo-head"><div class="demo-left"><span class="demo-tag">MODE DÉMONSTRATION</span><div><div class="demo-title">Tester différents profils d'élèves</div><div class="demo-hint">Ce bandeau sert à la présentation : il disparaîtra dans l'espace élève réel.</div></div></div><button type="button" class="text-button" id="demo-toggle" aria-expanded="true">Masquer les profils <svg class="icon small"><use href="#i-chevron"/></svg></button></div><div class="demo-list" id="demo-list" aria-label="Liste des 11 profils"></div></section>
+<section class="year-strip"><div class="year-title"><svg class="icon"><use href="#i-cal"/></svg><div>Année scolaire 2026-2027 <span class="year-details">Évaluation diagnostique · Octobre 2026</span></div></div><span class="year-pill">6e · Mathématiques</span></section>
+<section class="heading"><span class="heading-icon"><svg class="icon large"><use href="#i-chart"/></svg></span><div><h1>Mes résultats</h1><p>Comprends tes réussites, tes difficultés et découvre comment progresser.</p></div></section>
+<div class="student-topline"><span class="student-name-top" id="student-name">Camille Martin · 6e B</span><span class="student-session">Mon évaluation de rentrée · 129 questions</span></div>
+<section class="card result-overview" aria-label="Mon résultat général"><div class="donut"><svg viewBox="0 0 146 146" aria-hidden="true"><circle class="donut-track" cx="73" cy="73" r="59"/><circle class="donut-fill" id="donut-progress" cx="73" cy="73" r="59" stroke-dasharray="370.71 370.71" stroke-dashoffset="370.71"/></svg><div class="donut-label"><strong id="total-percent">— %</strong><span>de réussite</span></div></div><div class="overview-text"><h2 id="overall-title">Découvrons tes résultats.</h2><p id="overall-description">Nous avons regardé toutes tes réponses pour t'aider à comprendre tes difficultés.</p><div class="overview-meta"><div><strong id="correct-count">—</strong><span>bonnes réponses</span></div><div><strong>129</strong><span>questions</span></div><div><strong>11</strong><span>notions</span></div></div></div></section>
+<section class="card" id="step-1"><div class="section-head"><div class="section-left"><span class="step-no">1</span><div><h2>Mes bases indispensables sont-elles solides ?</h2><p>En mathématiques, certaines connaissances sont indispensables pour comprendre les autres. Stud’Éval les vérifie en premier.</p></div></div><span class="section-mini">Choisis un niveau pour voir le détail</span></div><div class="socles" id="socle-list"></div><div class="insight-strip" id="socle-reading"></div></section>
+<section class="card" id="step-2"><div class="section-head"><div class="section-left"><span class="step-no">2</span><div><h2>Mes résultats dans les grands domaines des mathématiques</h2><p id="family-subtitle">Pendant ton évaluation, tu as répondu à des questions sur les nombres, les calculs, la géométrie et bien d'autres notions.</p></div></div><span class="section-mini" id="family-socle-label">Les bases indispensables</span></div>
+<div class="domain-intro">Pour mieux comprendre tes résultats, Stud’Éval a regroupé les connaissances qui vont ensemble en <strong>quatre grands domaines</strong>. Cela permet de voir où tu réussis et où certaines difficultés peuvent te freiner dans la suite de tes apprentissages.</div>
+<div class="domain-level" id="domain-level"></div><div id="family-area"></div></section>
+<section class="card" id="step-3"><div class="section-head"><div class="section-left"><span class="step-no">3</span><div><h2>D'où viennent mes difficultés et que faire ?</h2><p>Une explication simple, avec quelques priorités pour progresser.</p></div></div></div><div id="analysis-area"></div></section>
+<section class="end-synth"><div><h2>Ce qu'il faut retenir</h2><p id="last-word">Stud’Éval recherche quelques explications utiles, sans analyser chaque erreur.</p></div><svg class="icon large"><use href="#i-heart"/></svg></section>
+<div class="footer"><span>Stud’Éval · Prototype de l'espace élève · Référentiel V6</span><small>Données et profils fictifs. Le repère de 90 % est illustratif et reste à valider.</small></div>
+</div></main></div>
 <script>
-var SCRIPT_URL   = "https://script.google.com/macros/s/AKfycbxlBMjVXIg58lsopoeQ5sEZW-jcQIOrOtnWwCGVtHLGjcmpi9exaYZ3oAEre4deZum2/exec";
-var ETABLISSEMENT = "Fourneyron";
-var currentEmail = "";
-var currentData  = null;
-
-// ── Structure complète des thèmes et fiches ─────────────────────
-var THEMES = [
-  {
-    id: "fractions",
-    titre: "Fractions",
-    icon: "🔢",
-    iconClass: "ic-fractions",
-    fiches: [
-      { id: "fractions_comprendre",         titre: "Comprendre les fractions",                        url: "https://arnaudreydellet.github.io/fiche-rem-diation-1/" },
-      { id: "fractions_reconnaitre_egales",  titre: "Reconnaître deux fractions égales",               url: "" },
-      { id: "fractions_irreductible",        titre: "Rendre une fraction irréductible",                url: "" },
-      { id: "fractions_add_meme_denom",      titre: "Additionner deux fractions de même dénominateur", url: "" },
-      { id: "fractions_denom_commun_1",      titre: "Trouver un dénominateur commun (1)",              url: "" },
-      { id: "fractions_denom_commun_2",      titre: "Trouver un dénominateur commun (2)",              url: "" },
-      { id: "fractions_add_quelconques",     titre: "Additionner deux fractions quelconques",          url: "" },
-      { id: "fractions_soustraction",        titre: "Soustraire deux fractions",                       url: "" },
-      { id: "fractions_mult_entier",         titre: "Multiplier une fraction par un entier",           url: "" },
-      { id: "fractions_mult_fractions",      titre: "Multiplier deux fractions entre elles",           url: "" },
-      { id: "fractions_inverse",             titre: "Comprendre l'inverse d'une fraction",             url: "" },
-      { id: "fractions_division",            titre: "Diviser par une fraction",                        url: "" },
-    ]
-  },
-  {
-    id: "proportionnalite",
-    titre: "Proportionnalité et pourcentages",
-    icon: "📊",
-    iconClass: "ic-propor",
-    fiches: []
-  },
-  {
-    id: "calcul_litteral",
-    titre: "Calcul littéral et équations",
-    icon: "✏️",
-    iconClass: "ic-litteral",
-    fiches: []
-  },
-  {
-    id: "fonctions",
-    titre: "Fonctions",
-    icon: "📈",
-    iconClass: "ic-fonctions",
-    fiches: []
-  },
-  {
-    id: "geometrie",
-    titre: "Géométrie",
-    icon: "📐",
-    iconClass: "ic-geometrie",
-    fiches: []
-  },
-  {
-    id: "nombres",
-    titre: "Nombres et calculs numériques",
-    icon: "🔣",
-    iconClass: "ic-nombres",
-    fiches: []
-  },
-  {
-    id: "stats",
-    titre: "Statistiques et probabilités",
-    icon: "🎲",
-    iconClass: "ic-stats",
-    fiches: []
-  }
+'use strict';
+const ITEMS = [{"socle":"F","rank":1,"code":"NUM-25","level":"CP","notion":"Nombres et calculs","title":"Lire et décomposer les nombres en dizaines et unités","index":0},{"socle":"F","rank":2,"code":"NUM-28","level":"CP","notion":"Nombres et calculs","title":"Comparer, ranger et placer les nombres entiers jusqu’à 100","index":1},{"socle":"F","rank":3,"code":"NUM-26","level":"CP","notion":"Nombres et calculs","title":"Comprendre quand utiliser une addition ou une soustraction dans un problème","index":2},{"socle":"F","rank":4,"code":"NUM-27","level":"CP","notion":"Nombres et calculs","title":"Utiliser les compléments à 10 et les additions simples connues","index":3},{"socle":"F","rank":5,"code":"LIT-27","level":"CP","notion":"Calcul littéral","title":"Comprendre que le signe égal relie deux expressions de même valeur","index":4},{"socle":"F","rank":6,"code":"EQU-21","level":"CP","notion":"Équations et inéquations","title":"Trouver le nombre manquant dans une addition simple","index":5},{"socle":"F","rank":7,"code":"FRA-28","level":"CP","notion":"Fractions","title":"Partager une quantité en parts égales","index":6},{"socle":"F","rank":8,"code":"FRA-29","level":"CP","notion":"Fractions","title":"Comprendre qu’une moitié est l’une de deux parts égales","index":7},{"socle":"F","rank":9,"code":"MES-36","level":"CP","notion":"Grandeurs et mesures","title":"Comprendre qu’une mesure est un nombre accompagné d’une unité","index":8},{"socle":"F","rank":10,"code":"MES-37","level":"CP","notion":"Grandeurs et mesures","title":"Mesurer une longueur en centimètres avec une règle graduée","index":9},{"socle":"F","rank":11,"code":"GEO-47","level":"CP","notion":"Géométrie","title":"Reconnaître et nommer les figures planes usuelles et leurs éléments","index":10},{"socle":"F","rank":12,"code":"GEO-48","level":"CP","notion":"Géométrie","title":"Repérer et vérifier des points alignés avec une règle","index":11},{"socle":"F","rank":13,"code":"REP-01","level":"CP","notion":"Repérage et transformations","title":"Se repérer et décrire un déplacement sur un quadrillage","index":12},{"socle":"F","rank":14,"code":"ALG-01","level":"CP","notion":"Algorithmique","title":"Suivre et écrire une suite d’instructions simples","index":13},{"socle":"F","rank":15,"code":"NUM-34","level":"CE1","notion":"Nombres et calculs","title":"Poser et calculer une addition de nombres entiers avec retenue","index":14},{"socle":"F","rank":16,"code":"NUM-35","level":"CE1","notion":"Nombres et calculs","title":"Poser et calculer une soustraction de nombres entiers avec retenue","index":15},{"socle":"F","rank":17,"code":"NUM-29","level":"CP","notion":"Nombres et calculs","title":"Reconnaître une situation de multiplication, de partage ou de groupement","index":16},{"socle":"F","rank":18,"code":"NUM-31","level":"CE1","notion":"Nombres et calculs","title":"Comprendre la multiplication comme une addition répétée et utiliser l’ordre des facteurs","index":17},{"socle":"F","rank":19,"code":"NUM-32","level":"CE1","notion":"Nombres et calculs","title":"Comprendre la division comme un partage ou un groupement et la relier à la multiplication","index":18},{"socle":"F","rank":20,"code":"NUM-33","level":"CE1","notion":"Nombres et calculs","title":"Connaître et utiliser les tables de multiplication par 2, 3, 4 et 5","index":19},{"socle":"F","rank":21,"code":"NUM-30","level":"CE1","notion":"Nombres et calculs","title":"Lire et décomposer les nombres en centaines, dizaines et unités","index":20},{"socle":"F","rank":22,"code":"NUM-36","level":"CE1","notion":"Nombres et calculs","title":"Comparer, ranger, encadrer et placer les nombres entiers jusqu’à 1 000","index":21},{"socle":"F","rank":23,"code":"NUM-37","level":"CE1","notion":"Nombres et calculs","title":"Multiplier un nombre entier par 10 grâce à la valeur des chiffres","index":22},{"socle":"F","rank":24,"code":"EQU-22","level":"CE1","notion":"Équations et inéquations","title":"Utiliser le lien entre addition et soustraction pour trouver un nombre inconnu","index":23},{"socle":"F","rank":25,"code":"FRA-30","level":"CE1","notion":"Fractions","title":"Calculer la moitié d’une quantité et retrouver la quantité entière","index":24},{"socle":"F","rank":26,"code":"MES-38","level":"CE1","notion":"Grandeurs et mesures","title":"Choisir une unité adaptée et estimer une longueur ou une masse","index":25},{"socle":"F","rank":27,"code":"GEO-49","level":"CE1","notion":"Géométrie","title":"Reconnaître une droite, un segment, un milieu et un angle droit","index":26},{"socle":"F","rank":28,"code":"GEO-50","level":"CE1","notion":"Géométrie","title":"Reconnaître un carré, un rectangle, un triangle et un triangle rectangle grâce à leurs côtés et leurs angles","index":27},{"socle":"F","rank":29,"code":"REP-02","level":"CE1","notion":"Repérage et transformations","title":"Coder et décoder un déplacement sur un quadrillage avec des flèches","index":28},{"socle":"F","rank":30,"code":"ALG-02","level":"CE1","notion":"Algorithmique","title":"Mettre des instructions dans l’ordre et les exécuter","index":29},{"socle":"F","rank":31,"code":"MES-39","level":"CE1","notion":"Grandeurs et mesures","title":"Convertir des longueurs entre centimètres, décimètres, mètres et kilomètres","index":30},{"socle":"F","rank":32,"code":"MES-40","level":"CE1","notion":"Grandeurs et mesures","title":"Convertir des masses entre grammes et kilogrammes","index":31},{"socle":"F","rank":33,"code":"MES-41","level":"CE1","notion":"Grandeurs et mesures","title":"Utiliser les jours, les heures et les minutes pour calculer une durée","index":32},{"socle":"F","rank":34,"code":"GEO-52","level":"CE1","notion":"Géométrie","title":"Choisir le bon instrument pour construire ou vérifier une figure simple","index":33},{"socle":"F","rank":35,"code":"NUM-38","level":"CE2","notion":"Nombres et calculs","title":"Lire et décomposer les nombres en milliers, centaines, dizaines et unités","index":34},{"socle":"F","rank":36,"code":"NUM-42","level":"CE2","notion":"Nombres et calculs","title":"Comparer, ranger, encadrer et placer les nombres entiers jusqu’à 10 000","index":35},{"socle":"F","rank":37,"code":"NUM-39","level":"CE2","notion":"Nombres et calculs","title":"Connaître et utiliser les tables de multiplication de 2 à 9","index":36},{"socle":"F","rank":38,"code":"NUM-40","level":"CE2","notion":"Nombres et calculs","title":"Poser et calculer une multiplication de nombres entiers","index":37},{"socle":"F","rank":39,"code":"NUM-41","level":"CE2","notion":"Nombres et calculs","title":"Multiplier un nombre entier par 10 ou par 100 grâce à la valeur des chiffres","index":38},{"socle":"F","rank":40,"code":"NUM-50","level":"CE1","notion":"Nombres et calculs","title":"Reconnaître un nombre entier pair ou impair","index":39},{"socle":"F","rank":41,"code":"STA-25","level":"CE2","notion":"Statistiques","title":"Lire des informations dans un tableau ou un graphique simple","index":40},{"socle":"F","rank":42,"code":"NUM-51","level":"CE2","notion":"Nombres et calculs","title":"Trouver le quotient et le reste d’une division euclidienne simple","index":41},{"socle":"F","rank":43,"code":"NUM-52","level":"CE2","notion":"Nombres et calculs","title":"Écrire une division euclidienne sous la forme dividende = diviseur × quotient + reste","index":42},{"socle":"F","rank":44,"code":"NUM-53","level":"CE2","notion":"Nombres et calculs","title":"Estimer le résultat d’un calcul et vérifier s’il est vraisemblable","index":43},{"socle":"F","rank":45,"code":"MES-42","level":"CE2","notion":"Grandeurs et mesures","title":"Convertir des longueurs entre millimètres, centimètres, décimètres, mètres et kilomètres","index":44},{"socle":"F","rank":46,"code":"MES-43","level":"CE2","notion":"Grandeurs et mesures","title":"Convertir des masses entre grammes, kilogrammes et tonnes","index":45},{"socle":"F","rank":47,"code":"MES-44","level":"CE2","notion":"Grandeurs et mesures","title":"Convertir des contenances entre centilitres, décilitres et litres","index":46},{"socle":"F","rank":48,"code":"MES-45","level":"CE2","notion":"Grandeurs et mesures","title":"Convertir et calculer des durées en heures, minutes et secondes","index":47},{"socle":"F","rank":49,"code":"GEO-54","level":"CE2","notion":"Géométrie","title":"Reconnaître une figure plane grâce à ses côtés et à ses angles","index":48},{"socle":"F","rank":50,"code":"REP-05","level":"CE2","notion":"Repérage et transformations","title":"Se repérer et décrire un déplacement avec le nord, le sud, l’est et l’ouest","index":49},{"socle":"F","rank":51,"code":"ALG-03","level":"CE2","notion":"Algorithmique","title":"Écrire et exécuter un algorithme simple de déplacement","index":50},{"socle":"F","rank":52,"code":"FRA-31","level":"CM1","notion":"Fractions","title":"Comprendre qu’une fraction représente une ou plusieurs parts égales d’une unité","index":51},{"socle":"F","rank":53,"code":"FRA-32","level":"CM1","notion":"Fractions","title":"Reconnaître le numérateur, le dénominateur et les différentes représentations d’une fraction","index":52},{"socle":"F","rank":54,"code":"STA-26","level":"CM1","notion":"Statistiques","title":"Lire et comprendre un tableau à simple ou double entrée","index":53},{"socle":"F","rank":55,"code":"NUM-49","level":"CM1","notion":"Nombres et calculs","title":"Lire et décomposer de grands nombres entiers","index":54},{"socle":"F","rank":56,"code":"NUM-43","level":"CM1","notion":"Nombres et calculs","title":"Comprendre la valeur des chiffres d’un nombre décimal jusqu’aux centièmes","index":55},{"socle":"F","rank":57,"code":"LIT-28","level":"CM1","notion":"Calcul littéral","title":"Utiliser la distributivité pour décomposer et calculer plus facilement","index":56},{"socle":"F","rank":58,"code":"EQU-24","level":"CM1","notion":"Équations et inéquations","title":"Utiliser les opérations inverses pour trouver un nombre inconnu","index":57},{"socle":"F","rank":59,"code":"PRO-30","level":"CM1","notion":"Proportionnalité","title":"Reconnaître une situation de proportionnalité et la distinguer d’une situation non proportionnelle","index":58},{"socle":"F","rank":60,"code":"PRO-31","level":"CM1","notion":"Proportionnalité","title":"Utiliser les propriétés additives et multiplicatives de la proportionnalité pour compléter un tableau","index":59},{"socle":"F","rank":61,"code":"FON-25","level":"CM1","notion":"Fonctions","title":"Lire les valeurs correspondantes de deux grandeurs dans un tableau ou un graphique","index":60},{"socle":"F","rank":62,"code":"STA-27","level":"CM1","notion":"Statistiques","title":"Lire et comprendre un diagramme en bâtons, circulaire ou semi-circulaire","index":61},{"socle":"F","rank":63,"code":"MES-46","level":"CM1","notion":"Grandeurs et mesures","title":"Convertir une longueur et l’écrire avec un nombre décimal","index":62},{"socle":"F","rank":64,"code":"GEO-55","level":"CM1","notion":"Géométrie","title":"Reconnaître les triangles et les quadrilatères particuliers grâce à leurs propriétés","index":63},{"socle":"F","rank":65,"code":"GEO-56","level":"CM1","notion":"Géométrie","title":"Reconnaître et utiliser des droites parallèles ou perpendiculaires","index":64},{"socle":"F","rank":66,"code":"GEO-57","level":"CM1","notion":"Géométrie","title":"Distinguer le cercle et le disque et repérer le centre, le rayon et le diamètre","index":65},{"socle":"F","rank":67,"code":"GEO-58","level":"CM1","notion":"Géométrie","title":"Comparer des angles et reconnaître un angle aigu, droit ou obtus","index":66},{"socle":"F","rank":68,"code":"GEO-51","level":"CP","notion":"Géométrie","title":"Reconnaître, nommer et décrire les solides usuels avec leurs faces et leurs sommets","index":67},{"socle":"F","rank":69,"code":"GEO-53","level":"CE1","notion":"Géométrie","title":"Décrire un cube, un pavé droit et une pyramide avec leurs faces, arêtes et sommets","index":68},{"socle":"F","rank":70,"code":"GEO-59","level":"CM1","notion":"Géométrie","title":"Reconnaître et décrire les solides usuels avec leurs faces, arêtes et sommets","index":69},{"socle":"F","rank":71,"code":"REP-06","level":"CM1","notion":"Repérage et transformations","title":"Coder et suivre un déplacement avec des quarts de tour et des demi-tours","index":70},{"socle":"F","rank":72,"code":"ALG-04","level":"CM1","notion":"Algorithmique","title":"Traduire un déplacement en une suite d’instructions codées","index":71},{"socle":"F","rank":73,"code":"PRO-32","level":"CM2","notion":"Proportionnalité","title":"Reconnaître une situation de proportionnalité et la distinguer d’une situation non proportionnelle","index":72},{"socle":"F","rank":74,"code":"PRO-33","level":"CM2","notion":"Proportionnalité","title":"Résoudre un problème de proportionnalité en passant par l’unité","index":73},{"socle":"F","rank":75,"code":"STA-29","level":"CM2","notion":"Statistiques","title":"Lire et comprendre l’échelle d’un diagramme ou d’un graphique","index":74},{"socle":"F","rank":76,"code":"EQU-23","level":"CP","notion":"Équations et inéquations","title":"Comparer deux nombres avec les signes < et >","index":75},{"socle":"F","rank":77,"code":"PRO-34","level":"CM2","notion":"Proportionnalité","title":"Utiliser un coefficient de proportionnalité pour compléter un tableau ou calculer une valeur","index":76},{"socle":"F","rank":82,"code":"FRA-33","level":"CM1","notion":"Fractions","title":"Placer une fraction sur une droite graduée et l’encadrer entre deux entiers","index":77},{"socle":"F","rank":85,"code":"FRA-35","level":"CM1","notion":"Fractions","title":"Comparer des fractions qui ont le même dénominateur","index":78},{"socle":"F","rank":86,"code":"FRA-36","level":"CM1","notion":"Fractions","title":"Additionner des fractions qui ont le même dénominateur","index":79},{"socle":"F","rank":101,"code":"MES-47","level":"CM1","notion":"Grandeurs et mesures","title":"Distinguer le périmètre et l’aire d’une figure","index":80},{"socle":"F","rank":102,"code":"MES-48","level":"CM1","notion":"Grandeurs et mesures","title":"Calculer le périmètre d’un polygone, d’un carré ou d’un rectangle","index":81},{"socle":"F","rank":103,"code":"MES-49","level":"CM1","notion":"Grandeurs et mesures","title":"Calculer l’aire d’un carré ou d’un rectangle dans la bonne unité","index":82},{"socle":"F","rank":104,"code":"MES-50","level":"CM1","notion":"Grandeurs et mesures","title":"Convertir des durées et calculer une durée ou un horaire","index":83},{"socle":"F","rank":134,"code":"FON-26","level":"CM2","notion":"Fonctions","title":"Passer d’un tableau de valeurs à un graphique et inversement","index":84},{"socle":"C","rank":1,"code":"REP-04","level":"CE1","notion":"Repérage et transformations","title":"Reconnaître et compléter une figure symétrique sur un quadrillage","index":85},{"socle":"C","rank":2,"code":"NUM-44","level":"CM1","notion":"Nombres et calculs","title":"Comparer, ranger, encadrer et placer des nombres décimaux","index":86},{"socle":"C","rank":3,"code":"NUM-45","level":"CM1","notion":"Nombres et calculs","title":"Poser et calculer une addition ou une soustraction de nombres décimaux","index":87},{"socle":"C","rank":4,"code":"NUM-54","level":"CM1","notion":"Nombres et calculs","title":"Multiplier et diviser un nombre décimal par 10","index":88},{"socle":"C","rank":5,"code":"FRA-34","level":"CM1","notion":"Fractions","title":"Écrire une fraction supérieure à 1 comme la somme d’un entier et d’une fraction inférieure à 1","index":89},{"socle":"C","rank":6,"code":"STA-28","level":"CM1","notion":"Statistiques","title":"Organiser des données dans un tableau et choisir le bon graphique","index":90},{"socle":"C","rank":7,"code":"REP-07","level":"CM1","notion":"Repérage et transformations","title":"Construire l’image d’un point, d’un segment ou d’une figure par symétrie axiale","index":91},{"socle":"C","rank":8,"code":"NUM-46","level":"CM2","notion":"Nombres et calculs","title":"Comprendre la valeur des chiffres d’un nombre décimal jusqu’aux millièmes","index":92},{"socle":"C","rank":9,"code":"MES-52","level":"CM2","notion":"Grandeurs et mesures","title":"Convertir des longueurs, des masses et des contenances avec des nombres décimaux","index":93},{"socle":"C","rank":10,"code":"NUM-47","level":"CM2","notion":"Nombres et calculs","title":"Comparer, ranger, encadrer et intercaler des nombres décimaux","index":94},{"socle":"C","rank":11,"code":"NUM-48","level":"CM2","notion":"Nombres et calculs","title":"Poser et calculer une addition ou une soustraction de nombres décimaux","index":95},{"socle":"C","rank":12,"code":"EQU-25","level":"CM2","notion":"Équations et inéquations","title":"Trouver un nombre inconnu dans une égalité avec des nombres décimaux","index":96},{"socle":"C","rank":13,"code":"NUM-58","level":"CM2","notion":"Nombres et calculs","title":"Multiplier ou diviser un nombre décimal par 10 ou par 100","index":97},{"socle":"C","rank":14,"code":"NUM-59","level":"CM2","notion":"Nombres et calculs","title":"Multiplier un nombre décimal par un nombre entier","index":98},{"socle":"C","rank":15,"code":"NUM-60","level":"CM2","notion":"Nombres et calculs","title":"Diviser un nombre entier ou décimal par un nombre entier et comprendre le quotient décimal","index":99},{"socle":"C","rank":16,"code":"NUM-57","level":"CM1","notion":"Nombres et calculs","title":"Estimer le résultat d’un calcul et vérifier s’il est vraisemblable","index":100},{"socle":"C","rank":17,"code":"NUM-56","level":"CM1","notion":"Nombres et calculs","title":"Effectuer une division euclidienne et comprendre le quotient et le reste","index":101},{"socle":"C","rank":18,"code":"REP-08","level":"CM2","notion":"Repérage et transformations","title":"Vérifier que deux points sont symétriques grâce à leur position et à leur distance par rapport à l’axe","index":102},{"socle":"C","rank":19,"code":"ALG-05","level":"CM2","notion":"Algorithmique","title":"Lire, compléter et corriger un algorithme simple de déplacement","index":103},{"socle":"C","rank":20,"code":"STA-30","level":"CM2","notion":"Statistiques","title":"Construire le graphique adapté à partir d’un tableau de données","index":104},{"socle":"C","rank":21,"code":"MES-53","level":"CM2","notion":"Grandeurs et mesures","title":"Utiliser les formules du périmètre du carré et du rectangle","index":105},{"socle":"C","rank":22,"code":"MES-54","level":"CM2","notion":"Grandeurs et mesures","title":"Utiliser les formules de l’aire du carré et du rectangle","index":106},{"socle":"C","rank":23,"code":"MES-55","level":"CM2","notion":"Grandeurs et mesures","title":"Comprendre le volume comme un nombre de cubes- unités","index":107},{"socle":"C","rank":24,"code":"MES-51","level":"CM1","notion":"Grandeurs et mesures","title":"Relier les unités de volume et de contenance et choisir la bonne unité","index":108},{"socle":"C","rank":25,"code":"MES-56","level":"CM2","notion":"Grandeurs et mesures","title":"Relier les unités de volume et de contenance","index":109},{"socle":"C","rank":26,"code":"REP-09","level":"CM2","notion":"Repérage et transformations","title":"Enchaîner plusieurs déplacements et changements de direction sur un plan","index":110},{"socle":"C","rank":38,"code":"MES-58","level":"CM2","notion":"Grandeurs et mesures","title":"Calculer une durée ou retrouver un horaire","index":111},{"socle":"C","rank":39,"code":"MES-57","level":"CM2","notion":"Grandeurs et mesures","title":"Convertir une durée en utilisant le quotient et le reste","index":112},{"socle":"C","rank":51,"code":"NUM-55","level":"CM1","notion":"Nombres et calculs","title":"Utiliser les critères de divisibilité par 2, 5 et 10","index":113},{"socle":"C","rank":52,"code":"NUM-62","level":"CM2","notion":"Nombres et calculs","title":"Utiliser les critères de divisibilité par 2, 3, 5, 9 et 10","index":114},{"socle":"C","rank":72,"code":"NUM-61","level":"CM2","notion":"Nombres et calculs","title":"Estimer le résultat d’un calcul et vérifier s’il est vraisemblable","index":115},{"socle":"C","rank":77,"code":"FRA-37","level":"CM1","notion":"Fractions","title":"Passer d’une fraction décimale à un nombre décimal et inversement","index":116},{"socle":"C","rank":78,"code":"FRA-39","level":"CM2","notion":"Fractions","title":"Passer d’une fraction décimale à un nombre décimal jusqu’aux millièmes et inversement","index":117},{"socle":"C","rank":80,"code":"FRA-38","level":"CM2","notion":"Fractions","title":"Reconnaître et écrire des fractions égales","index":118},{"socle":"C","rank":87,"code":"FRA-40","level":"CM2","notion":"Fractions","title":"Calculer une fraction simple d’une quantité en multipliant par cette fraction","index":119},{"socle":"C","rank":103,"code":"GEO-63","level":"CM2","notion":"Géométrie","title":"Classer les triangles et les quadrilatères particuliers grâce à leurs propriétés","index":120},{"socle":"C","rank":104,"code":"GEO-64","level":"CM2","notion":"Géométrie","title":"Comprendre que le carré, le rectangle et le losange sont des parallélogrammes particuliers","index":121},{"socle":"C","rank":105,"code":"GEO-65","level":"CM2","notion":"Géométrie","title":"Utiliser le parallélisme, la perpendicularité et la distance d’un point à une droite","index":122},{"socle":"C","rank":106,"code":"GEO-66","level":"CM2","notion":"Géométrie","title":"Lire un programme de construction et reconnaître la figure obtenue","index":123},{"socle":"C","rank":107,"code":"GEO-60","level":"CP","notion":"Géométrie","title":"Associer un assemblage de cubes ou de pavés droits à sa représentation","index":124},{"socle":"C","rank":108,"code":"GEO-61","level":"CE1","notion":"Géométrie","title":"Reconnaître le patron d’un cube et associer ses faces au solide","index":125},{"socle":"C","rank":109,"code":"GEO-62","level":"CM1","notion":"Géométrie","title":"Associer un solide à son patron ou à une représentation plane","index":126},{"socle":"C","rank":110,"code":"GEO-67","level":"CM2","notion":"Géométrie","title":"Reconnaître les patrons d’un cube, d’un pavé droit et d’une pyramide","index":127},{"socle":"C","rank":162,"code":"LIT-29","level":"CM2","notion":"Calcul littéral","title":"Transformer un calcul grâce à la commutativité, à l’associativité et à la distributivité","index":128}];
+const PROFILES = [{"id":"camille","name":"Camille Martin","type":"Difficultés dans les bases numériques","category":"Fondations","short":"Une origine structurante se dessine dans les nombres, le partage et les fractions.","answers":"100011001011110100001111111111111100110110011001111001001101111111011111001101011001110010110100100001111110101100000000110111111"},{"id":"lucas","name":"Lucas Bernard","type":"Difficultés ciblées","category":"Consolidation","short":"Les bases sont solides ; les erreurs concernent surtout des apprentissages plus récents.","answers":"111111111101111111111111111111111101111110111111110111111111111111111011111111111111110010110100100001111111111111000000111111110"},{"id":"ines","name":"Inès Laurent","type":"Acquis solides","category":"Maîtrise satisfaisante","short":"Des résultats satisfaisants : aucune recherche approfondie nécessaire.","answers":"111111111111111111111111111111111111111111111111111100111111110111111011111111111111111111111111100101111111111111111111111111111"},{"id":"nora","name":"Nora Petit","type":"Résultats dispersés","category":"Sans origine unique","short":"Des erreurs réparties dans plusieurs domaines, sans chaîne explicative dominante.","answers":"010111111111011111111001010101111111011011010110110111110101101011001101100010100011100100101000101111110111111011011101101111011"},{"id":"yanis","name":"Yanis Moreau","type":"Géométrie et mesures","category":"Fondations","short":"Une fragilité du raisonnement spatial peut se prolonger dans les mesures.","answers":"111111110000001011111111100001000111111101111100011011111111110111000101111111110011101111110011111111101010101000101111010000111"},{"id":"sarah","name":"Sarah Dubois","type":"Bases contrastées","category":"Résultats contrastés","short":"Les bases montrent des faiblesses, sans retentissement net dans les notions à consolider.","answers":"000110011011110011011111101111011100011101000101111011001111111101110111111100100001111111111111111111111011011111111110111111011"},{"id":"adam","name":"Adam Leroy","type":"Égalité et relations","category":"Fondations","short":"Les relations entre nombres, l’égalité et les inconnues concentrent les fragilités.","answers":"001100111111101011101000111111000101110110011111111111100011001111111111111011111111010101100100010110011111101110011101111110110"},{"id":"emma","name":"Emma Girard","type":"Deux origines distinctes","category":"Mixte","short":"Deux chaînes d’apprentissage différentes sont fragilisées.","answers":"100111101000110101011001010111100010011110011100001010111111110010101001111110101100110010111011100011011111010110001100010101001"},{"id":"louis","name":"Louis Fontaine","type":"Difficultés sur plusieurs notions","category":"Consolidation","short":"Les bases sont installées ; plusieurs notions à consolider restent à acquérir.","answers":"111110111111111111111111111110111111111110111111111111111111111111111110111111011011100000000011110101011110010101110010001101101"},{"id":"mael","name":"Maël Robert","type":"Profil intermédiaire","category":"Sans origine unique","short":"Quelques faiblesses, mais pas de grand mécanisme explicatif confirmé.","answers":"101111111111011111101111101111111110110100101110111110111111111100111100111111111111110111111111011111101100010111000111101111111"},{"id":"mathis","name":"Mathis Perrin","type":"Fragilités généralisées","category":"Fondations","short":"Des difficultés nombreuses dans les bases indispensables et dans les notions à consolider.","answers":"000000010100001100100010010111000010110001001000110011010100110011010101101011100110000110001010000101010000011000011001010010110"}];
+const ALL = Object.fromEntries(ITEMS.map((it,i)=>[it.code,{...it,index:i}]));
+const PASS_SCORE = 90; // Repère illustratif, pas un seuil pédagogique officiellement validé
+const FAMILY_DEFS = [
+  {id:'nombres',title:'Comprendre et utiliser les nombres',description:'Numération · calcul · fractions · proportionnalité',pred:it=>['Nombres et calculs','Fractions','Proportionnalité'].includes(it.notion)},
+  {id:'relations',title:'Comprendre les relations mathématiques',description:'Équations · calcul littéral · fonctions · prérequis numériques',pred:it=>['Équations et inéquations','Calcul littéral','Fonctions'].includes(it.notion)||['NUM-26','NUM-43','NUM-53','NUM-44','NUM-47','NUM-57','NUM-61'].includes(it.code)},
+  {id:'espace',title:'Comprendre l’espace et les formes',description:'Géométrie · mesures · repérage · algorithmique',pred:it=>['Géométrie','Grandeurs et mesures','Repérage et transformations','Algorithmique'].includes(it.notion)},
+  {id:'donnees',title:'Comprendre et représenter les données',description:'Statistiques · fonctions · proportionnalité',pred:it=>['Statistiques','Fonctions','Proportionnalité'].includes(it.notion)}
 ];
+const STORIES={
+  camille:{verdict:'Plusieurs difficultés semblent remonter aux bases du partage, de la division et des fractions.',defaults:{F:'nombres',C:'nombres'},cases:{
+    'F:nombres':{kind:'structural',label:'Origine structurante probable',title:'Le partage et le sens des fractions constituent un point de départ plausible.',body:'Les erreurs apparaissent dès les compétences fondamentales de partage et de division. Elles se retrouvent ensuite dans la compréhension des fractions et dans les apprentissages plus complexes. Une origine commune est plausible, sans être démontrée par une seule question.',codes:['NUM-29','NUM-32','FRA-31'],mode:'chain',actions:['Reprendre le sens du partage et du groupement.','Consolider la compréhension des fractions comme parts égales.','Revenir ensuite à la proportionnalité et aux fractions plus complexes.']},
+    'C:nombres':{kind:'structural',label:'Lien possible avec les bases indispensables',title:'Les erreurs du deuxième niveau semblent prolonger une difficulté plus ancienne.',body:'Le diagnostic montre des échecs sur les premiers apprentissages des fractions puis sur leur décomposition. Avant de multiplier les exercices plus avancés, la priorité serait de restaurer le sens même de la fraction.',codes:['FRA-28','FRA-31','FRA-34'],mode:'chain',actions:['Revoir le partage de l’unité en parts égales.','Stabiliser le sens de la fraction.','Reprendre la décomposition des fractions supérieures à 1.']}
+  }},
+  lucas:{verdict:'Les bases indispensables sont satisfaisantes ; les difficultés concernent surtout les notions à consolider.',defaults:{F:'nombres',C:'nombres'},cases:{
+    'C:nombres':{kind:'ciblé',label:'Difficulté ciblée des notions à consolider',title:'Ne pas reprendre les bases : travailler directement les nombres décimaux.',body:'Dans cette simulation, la valeur des chiffres d’un décimal est correctement reconnue dans les bases indispensables. En revanche, la comparaison et les opérations avec des décimaux posent problème dans les notions à consolider. Aucune lacune fondamentale commune n’est établie ici.',codes:['NUM-43','NUM-44','NUM-45'],mode:'chain',actions:['Travailler la comparaison et le rangement des décimaux.','Reprendre l’addition et la soustraction de décimaux.']}
+  }},
+  ines:{verdict:'Les deux niveaux sont globalement satisfaisants : aucune analyse poussée n’est justifiée.',defaults:{F:'nombres',C:'nombres'},cases:{}},
+  nora:{verdict:'Le score global est fragile, mais les erreurs sont trop éparpillées pour identifier une cause commune fiable.',defaults:{F:'espace',C:'espace'},cases:{
+    'F:espace':{kind:'incertain',label:'Pas d’origine commune établie',title:'Des erreurs réelles, mais sans premier maillon clairement identifiable.',body:'Les échecs concernent ici des apprentissages distincts : angles, durées et déplacements. La seule appartenance à une même grande famille ne prouve pas qu’une erreur explique les autres. Il vaut mieux proposer un entraînement ciblé que construire une causalité artificielle.',codes:['GEO-58','MES-45','REP-06'],mode:'isolated',actions:['Cibler les compétences effectivement échouées.','Observer les résultats à la remédiation avant de rechercher une origine commune.']},
+    'C:espace':{kind:'incertain',label:'Pas d’origine commune établie',title:'Plusieurs erreurs spatiales, sans chaîne explicative dominante.',body:'La géométrie, les mesures et le repérage comportent ici des erreurs distinctes. Leur présence dans une même famille ne signifie pas nécessairement que l’une explique les autres. Mieux vaut reprendre ces compétences ciblées sans affirmer une cause commune.',codes:['REP-04','MES-52','GEO-64'],mode:'isolated',actions:['Reprendre quelques notions à consolider en difficulté.','Éviter de conclure à une faiblesse fondamentale unique.']}
+  }},
+  yanis:{verdict:'Les difficultés se regroupent surtout autour de la géométrie, du repérage et des mesures.',defaults:{F:'espace',C:'espace'},cases:{
+    'F:espace':{kind:'structural',label:'Origine structurante plausible',title:'La reconnaissance des figures pourrait fragiliser les apprentissages géométriques suivants.',body:'Les difficultés sont présentes dès les figures usuelles et se prolongent dans des reconnaissances plus élaborées. Des difficultés de mesure sont également visibles : il s’agit d’un ensemble à explorer, pas d’une preuve que la géométrie explique toute la mesure.',codes:['GEO-47','GEO-54','GEO-63'],mode:'chain',actions:['Revoir la reconnaissance des figures et de leurs propriétés.','Consolider les unités et les mesures concernées.','Revenir aux tâches plus complexes de géométrie.']},
+    'C:espace':{kind:'structural',label:'Bases à vérifier',title:'Les difficultés de mesure semblent liées à des acquis plus anciens.',body:'Certaines bases de mesure échouent alors que des tâches de conversion ou de mesure plus récentes échouent également. Le lien est plausible et mérite d’être pris en compte dans l’ordre de remédiation.',codes:['MES-36','MES-37','MES-52'],mode:'chain',actions:['Reprendre le sens d’une mesure et de son unité.','Réentraîner les mesures simples.','Revenir aux conversions et aux applications plus récentes.']}
+  }},
+  sarah:{verdict:'Les bases indispensables sont fragiles, mais les notions à consolider sont bien réussies. Il n’y a pas de répercussion évidente.',defaults:{F:'nombres',C:'nombres'},cases:{
+    'F:nombres':{kind:'contraste',label:'Résultats contrastés',title:'Des lacunes de base existent, sans effet domino évident dans les résultats.',body:'Des réponses fondamentales sont incorrectes, alors que certaines tâches plus avancées sont réussies. Le moteur doit signaler ce contraste plutôt que prétendre que toutes les réponses dans le deuxième niveau proviennent d’un même défaut des bases indispensables.',codes:['NUM-32','NUM-43','NUM-44'],mode:'compare',actions:['Consolider ponctuellement les bases non réussies.','Ne pas reprogrammer les notions du deuxième niveau, déjà globalement réussies.']}
+  }},
+  adam:{verdict:'La difficulté apparaît d’abord dans la compréhension de l’égalité et la recherche de nombres inconnus.',defaults:{F:'relations',C:'relations'},cases:{
+    'F:relations':{kind:'structural',label:'Origine structurante plausible',title:'Le sens de l’égalité semble constituer un point de fragilité précoce.',body:'Les erreurs commencent par le signe égal et se poursuivent lorsque l’élève doit trouver un nombre manquant. Ces apprentissages sont suffisamment reliés pour proposer une reprise progressive.',codes:['LIT-27','EQU-21','EQU-22'],mode:'chain',actions:['Redonner le sens du signe égal.','Travailler les nombres manquants dans les opérations simples.','Reprendre ensuite les égalités avec des décimaux.']},
+    'C:relations':{kind:'structural',label:'Lien possible avec les bases indispensables',title:'Les difficultés sur les égalités décimales peuvent prolonger un obstacle plus ancien.',body:'Les réponses suggèrent de reprendre le sens de l’égalité avant de travailler la recherche d’un inconnu dans des situations plus complexes.',codes:['LIT-27','EQU-21','EQU-25'],mode:'chain',actions:['Consolider le sens de l’égalité.','Revenir aux nombres inconnus avec des décimaux.']}
+  }},
+  emma:{verdict:'Deux origines distinctes émergent : une chaîne numérique et une chaîne géométrique.',defaults:{F:'nombres',C:'espace'},cases:{
+    'F:nombres':{kind:'structural',label:'Première origine plausible',title:'Une chaîne numérique fragilisée, centrée sur le partage et les fractions.',body:'Les erreurs sur le partage et le sens des fractions forment un premier ensemble cohérent. Mais elles n’expliquent pas à elles seules les difficultés spatiales de l’élève.',codes:['NUM-29','FRA-31','FRA-34'],mode:'chain',actions:['Consolider le partage et le groupement.','Reprendre le sens des fractions.','Traiter séparément les difficultés géométriques.']},
+    'F:espace':{kind:'structural',label:'Deuxième origine plausible',title:'Une seconde chaîne, distincte, concerne la reconnaissance des figures.',body:'La reconnaissance des figures usuelles est fragile, tout comme des compétences géométriques ultérieures. Il serait trompeur de relier ce résultat à la seule faiblesse en fractions.',codes:['GEO-47','GEO-54','GEO-63'],mode:'chain',actions:['Reprendre les figures usuelles et leurs propriétés.','Réentraîner les reconnaissances plus avancées.','Garder les apprentissages numériques comme autre axe indépendant.']},
+    'C:espace':{kind:'structural',label:'Lien plausible avec les bases indispensables',title:'Des fragilités anciennes peuvent peser sur la géométrie des notions à consolider.',body:'Les erreurs géométriques plus complexes se situent dans la continuité de connaissances fondamentales non réussies. Les deux axes de remédiation doivent néanmoins rester distincts.',codes:['GEO-47','GEO-54','GEO-63'],mode:'chain',actions:['Réviser les figures et les propriétés fondamentales.','Réinvestir les compétences géométriques plus complexes.']}
+  }},
+  louis:{verdict:'Les bases sont solides, mais plusieurs domaines des notions à consolider demandent un travail ciblé.',defaults:{F:'nombres',C:'espace'},cases:{
+    'C:espace':{kind:'ciblé',label:'Difficultés dans plusieurs notions',title:'Des besoins ciblés sans cause fondamentale commune évidente.',body:'La géométrie, les mesures et le repérage comportent des erreurs. Les bases indispensables sont globalement solides : rien ne justifie, dans cette simulation, de reconstruire systématiquement toutes les bases.',codes:['GEO-63','MES-52','REP-07'],mode:'isolated',actions:['Identifier deux ou trois compétences précises à retravailler.','Vérifier les acquis à la fin de la remédiation.']},
+    'C:nombres':{kind:'ciblé',label:'Travail ciblé des notions à consolider',title:'Des erreurs dans les décimaux et les fractions, sans origine unique.',body:'Ces deux difficultés sont observées dans les notions à consolider, mais ne doivent pas être reliées artificiellement si les prérequis correspondants sont réussis.',codes:['NUM-44','FRA-34'],mode:'isolated',actions:['Retravailler les nombres décimaux.','Retravailler les décompositions de fractions.']}
+  }},
+  mael:{verdict:'Les résultats sont intermédiaires, sans famille ou origine suffisamment dominante.',defaults:{F:'espace',C:'espace'},cases:{
+    'F:espace':{kind:'incertain',label:'Lecture prudente',title:'Plusieurs fragilités, mais pas de chaîne dominante.',body:'Les réponses échouées concernent des compétences variées. Le score justifie une vigilance, pas une explication causale automatique. Une remédiation courte et ciblée est plus pertinente qu’une recherche sans fin.',codes:['GEO-57','MES-45','REP-06'],mode:'isolated',actions:['Sélectionner quelques erreurs précises et vérifiables.','Réévaluer après un premier entraînement.']}
+  }},
+  mathis:{verdict:'Les deux niveaux présentent de nombreuses difficultés. Il faut d’abord sécuriser des bases indispensables.',defaults:{F:'nombres',C:'nombres'},cases:{
+    'F:nombres':{kind:'structural',label:'Bases largement fragiles',title:'Plusieurs apprentissages essentiels sont à reconstruire.',body:'Les erreurs concernent des bases très anciennes, notamment la numération et la compréhension des fractions. On peut prioriser ces apprentissages, sans chercher à expliquer chaque échec par une seule cause.',codes:['NUM-25','FRA-28','PRO-30'],mode:'isolated',actions:['Sécuriser les premiers apprentissages numériques.','Reprendre le partage et le sens des fractions.','Revoir les propriétés fondamentales de géométrie et de mesure.']},
+    'C:nombres':{kind:'structural',label:'Conséquences possibles de bases très fragiles',title:'Le deuxième niveau est également fragile : commencer plus en amont.',body:'L’élève rencontre des difficultés dès les premiers apprentissages, puis sur des exercices plus complexes. Une remise à niveau ciblée des bases indispensables a davantage de sens que des exercices avancés dispersés.',codes:['NUM-25','NUM-43','NUM-44'],mode:'chain',actions:['Reprendre numération et valeur de position.','Réintroduire ensuite les nombres décimaux.']}
+  }}
+};
 
-document.getElementById('login-email').addEventListener('keydown', function(e) {
-  if (e.key === 'Enter') connexion();
-});
 
-function connexion() {
-  var email = document.getElementById('login-email').value.trim();
-  if (!email) return;
-  var btn = document.getElementById('btn-login');
-  btn.disabled = true;
-  btn.textContent = 'Recherche...';
-  document.getElementById('login-err').style.display = 'none';
 
-  var url = SCRIPT_URL + '?type=eleve&email=' + encodeURIComponent(email) + '&etablissement=' + ETABLISSEMENT + '&t=' + Date.now();
-  fetch(url)
-    .then(function(r) { return r.json(); })
-    .then(function(json) {
-      if (json.status === 'ok') {
-        currentEmail = email;
-        currentData  = json;
-        afficherDashboard(json);
-      } else {
-        document.getElementById('login-err').style.display = 'block';
-        btn.disabled = false;
-        btn.textContent = 'Accéder à mes fiches →';
-      }
-    })
-    .catch(function() {
-      document.getElementById('login-err').textContent = 'Erreur de connexion. Réessaie dans quelques instants.';
-      document.getElementById('login-err').style.display = 'block';
-      btn.disabled = false;
-      btn.textContent = 'Accéder à mes fiches →';
-    });
+const $ = id => document.getElementById(id);
+const esc = text => String(text).replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+const icon = (name='i-info',className='icon small')=>`<svg class="${className}"><use href="#${name}"/></svg>`;
+const CIRC=2*Math.PI*59;
+const STUDENT_INTRO={
+ camille:{title:'Certaines bases restent à consolider.',intro:'Tu as des acquis, mais des difficultés semblent commencer dans les premiers apprentissages des nombres et des fractions. Nous allons t’indiquer par où reprendre.'},
+ lucas:{title:'Tes bases indispensables sont solides. C’est une bonne nouvelle !',intro:'Tu connais les bases indispensables. Tu as surtout besoin de t’entraîner sur des connaissances plus précises pour progresser.'},
+ ines:{title:'Très bon travail, tes acquis sont solides !',intro:'Tu as réussi la grande majorité des questions. Tes bases et tes notions à consolider sont satisfaisantes.'},
+ nora:{title:'Tes erreurs sont réparties dans plusieurs domaines.',intro:'Tu as besoin de progresser, mais tes réponses ne montrent pas une seule cause qui expliquerait toutes tes difficultés.'},
+ yanis:{title:'Une partie de tes difficultés concerne la géométrie.',intro:'Tu rencontres des obstacles sur les figures, le repérage et les mesures. Certaines connaissances de base semblent importantes à reprendre.'},
+ sarah:{title:'Tu réussis bien les notions à consolider malgré quelques bases fragiles.',intro:'Certaines questions fondamentales t’ont posé problème, mais tu réussis les apprentissages suivants. Il faut éviter d’en déduire que tout est à revoir.'},
+ adam:{title:'Comprendre l’égalité pourrait t’aider à progresser.',intro:'Plusieurs difficultés semblent se rejoindre autour du signe égal et des nombres manquants.'},
+ emma:{title:'Deux difficultés différentes ressortent de tes réponses.',intro:'Tu as des points à reprendre en calcul et en géométrie. Il ne faut pas chercher une cause commune si ce sont deux obstacles distincts.'},
+ louis:{title:'Les bases sont là : travaillons les points précis.',intro:'Tu réussis bien les apprentissages essentiels. Les difficultés se situent surtout dans certaines notions à consolider.'},
+ mael:{title:'Tes résultats sont mitigés, sans cause unique évidente.',intro:'Plusieurs petites difficultés apparaissent. Nous allons les repérer sans inventer une origine commune.'},
+ mathis:{title:'Reprendre certaines bases t’aidera beaucoup.',intro:'Plusieurs connaissances importantes ne sont pas encore assurées. Reprendre les bases indispensables te permettra d’avancer plus sereinement.'}
+};
+const SIMPLE={
+ camille:{'F:nombres':{title:'Le partage et les fractions sont un bon point de départ.',body:'Tu as rencontré des difficultés sur le partage et la division, puis sur le sens des fractions. Ces connaissances sont liées : en reprenant les premières, tu pourrais mieux comprendre les suivantes.',actions:['Comprendre la différence entre partager et regrouper.','Représenter des parts égales pour donner du sens aux fractions.','Revenir ensuite aux exercices plus complexes sur les fractions.']},'C:nombres':{title:'Tes erreurs sur les fractions semblent liées à des bases plus anciennes.',body:'Les exercices sur les fractions plus complexes sont difficiles, et tu as aussi échoué sur certaines questions de base. Nous te conseillons donc de repartir du sens de la fraction.',actions:['Revoir le partage d’une unité en parts égales.','Savoir représenter une fraction.','Puis décomposer les fractions supérieures à 1.']}},
+ lucas:{'C:nombres':{title:'Tu n’as pas besoin de reprendre toutes les bases.',body:'Tu réussis les questions fondamentales sur les nombres. En revanche, comparer et calculer avec des nombres décimaux te demande encore de l’entraînement. Ce sont des points précis à travailler.',actions:['T’entraîner à comparer et ranger des nombres décimaux.','Reprendre les additions et soustractions avec des décimaux.']}},
+ nora:{'F:espace':{title:'Tes erreurs sont réelles, mais leur origine commune n’est pas claire.',body:'Tu t’es trompée dans plusieurs apprentissages différents : les angles, les durées et les déplacements. Rien ne permet ici de dire qu’une seule connaissance explique toutes ces difficultés.',actions:['Retravailler une ou deux connaissances sur lesquelles tu t’es trompée.','Vérifier ensuite si ces difficultés persistent.']},'C:espace':{title:'Plusieurs erreurs, mais pas de cause unique identifiable.',body:'Les erreurs touchent différents apprentissages d’espace et de mesure. Nous préférons t’aider sur ces points précis plutôt que de t’annoncer une explication incertaine.',actions:['Reprendre les exercices précis non réussis.','Vérifier tes acquis après un entraînement court.']}},
+ yanis:{'F:espace':{title:'La reconnaissance des figures semble être une base à reprendre.',body:'Certaines figures simples et leurs propriétés t’ont posé problème. Cela peut rendre des exercices de géométrie plus avancés difficiles, même si toutes les erreurs ne viennent pas de là.',actions:['Reconnaître et nommer les figures les plus courantes.','Revoir leurs côtés, leurs angles et leurs propriétés.','Réessayer ensuite les exercices plus complexes.']},'C:espace':{title:'Des difficultés en mesure peuvent venir de connaissances plus anciennes.',body:'Tu as rencontré des difficultés avec la mesure et ses unités dans les bases, puis dans les notions du deuxième niveau. Reprendre les premières pourrait t’aider sur les suivantes.',actions:['Comprendre ce qu’est une mesure et son unité.','T’entraîner sur des mesures simples.','Reprendre les conversions et les exercices suivants.']}},
+ sarah:{'F:nombres':{title:'Quelques bases sont à consolider, mais tu réussis bien la suite.',body:'Tu t’es trompée sur certaines questions fondamentales. Pourtant, tu réussis globalement bien les questions du deuxième niveau. Il n’y a pas de raison de conclure que tout ton apprentissage est bloqué.',actions:['Revenir seulement sur les connaissances de base non réussies.','Conserver les acquis du deuxième niveau : inutile de tout recommencer.']}},
+ adam:{'F:relations':{title:'Le signe égal est peut-être le point de départ.',body:'Tu rencontres des difficultés pour comprendre l’égalité et trouver un nombre manquant. Ces deux apprentissages sont liés : le sens du signe égal peut t’aider à résoudre les autres questions.',actions:['Revoir le sens du signe égal.','Chercher des nombres manquants dans des additions simples.','Passer ensuite aux égalités plus complexes.']},'C:relations':{title:'Tes difficultés avec les égalités semblent se prolonger.',body:'Tu as rencontré des erreurs sur les égalités simples, puis sur des apprentissages plus avancés. Il serait utile de reprendre d’abord le sens de l’égalité.',actions:['Revoir ce que veut dire le signe égal.','T’entraîner à trouver un nombre inconnu.']}},
+ emma:{'F:nombres':{title:'Première difficulté : le partage et les fractions.',body:'Plusieurs réponses montrent que le partage et le sens des fractions méritent d’être retravaillés. Mais cela n’explique pas les erreurs de géométrie : elles seront étudiées séparément.',actions:['Revoir le partage et le groupement.','Représenter des fractions à partir de parts égales.','Garder la géométrie comme un autre axe de travail.']},'F:espace':{title:'Deuxième difficulté : reconnaître les figures.',body:'Dans les questions de géométrie, plusieurs erreurs portent sur la reconnaissance des figures et leurs propriétés. C’est un autre point de départ, distinct des difficultés sur les fractions.',actions:['Reconnaître les figures usuelles.','Retrouver leurs propriétés principales.','Revenir aux figures plus complexes.']},'C:espace':{title:'En géométrie aussi, certaines bases méritent d’être revues.',body:'Tu as des erreurs sur les figures simples et sur des figures plus avancées. Reprendre les premiers apprentissages pourrait t’aider à comprendre les seconds.',actions:['Réviser les figures et leurs propriétés.','Réessayer ensuite les exercices du deuxième niveau.']}},
+ louis:{'C:espace':{title:'Plusieurs connaissances sont à travailler directement.',body:'Tes bases indispensables sont solides. Tu as quelques difficultés en géométrie, en repérage et en mesures, mais elles ne viennent pas forcément d’une seule cause.',actions:['Choisir deux ou trois exercices ciblés à retravailler.','Vérifier tes progrès après l’entraînement.']},'C:nombres':{title:'Deux difficultés précises, sans origine commune établie.',body:'Tu t’es trompé sur certains exercices de nombres décimaux et de fractions. Comme tes bases indispensables sont solides, tu peux travailler directement ces points.',actions:['T’entraîner sur les nombres décimaux.','Reprendre la décomposition des fractions.']}},
+ mael:{'F:espace':{title:'Tes erreurs sont variées : inutile de chercher une cause unique.',body:'Les difficultés apparaissent sur des points différents de géométrie, de mesures et de repérage. Nous ne pouvons pas les relier de manière fiable à une seule connaissance.',actions:['Choisir quelques compétences non réussies.','Les retravailler, puis faire un nouveau point.']}},
+ mathis:{'F:nombres':{title:'Il faut repartir de quelques connaissances essentielles.',body:'Tu rencontres des difficultés dès les premières questions sur les nombres, le partage et les fractions. En reprenant ces bases dans l’ordre, tu pourras construire des apprentissages plus solides.',actions:['Revoir la numération et la valeur des chiffres.','Retrouver le sens du partage et des fractions.','Reprendre ensuite les autres apprentissages.']},'C:nombres':{title:'Pour consolider ces notions, mieux vaut commencer par les bases.',body:'Tu rencontres des difficultés sur les nombres entiers et décimaux. Comme certains apprentissages plus anciens sont fragiles, il est préférable de les retravailler avant les suivants.',actions:['Revoir la numération et la valeur de position.','Revenir ensuite aux nombres décimaux.']}}
+};
+const FAMILY_COPY={
+  nombres:{content:'On y retrouve les nombres, les opérations, les fractions, la proportionnalité et certaines mesures.',importance:'Ces connaissances sont indispensables pour effectuer des calculs et résoudre de nombreux problèmes mathématiques.'},
+  relations:{content:'On y travaille les égalités, les nombres inconnus, les expressions mathématiques et les liens entre différentes quantités.',importance:'Ces connaissances permettent de comprendre les règles de calcul et de résoudre des problèmes en utilisant des raisonnements.'},
+  espace:{content:'On y retrouve les figures géométriques, les solides, les angles, les longueurs, les aires et le repérage.',importance:'Ces connaissances servent à reconnaître et construire des figures, utiliser leurs propriétés et effectuer des mesures.'},
+  donnees:{content:'On y travaille la lecture de tableaux, de diagrammes et de graphiques, ainsi que l’organisation des données.',importance:'Ces connaissances permettent de lire des informations, comparer des résultats et interpréter des données.'}
+};
+let activeProfile='camille',activeSocle='F',activeFamily='nombres';
+const pProfile=()=>PROFILES.find(x=>x.id===activeProfile);
+const score=(p,s,predicate=null)=>{const a=ITEMS.filter(i=>i.socle===s&&(!predicate||predicate(i)));const good=a.filter(i=>p.answers[i.index]==='1').length;return {good,n:a.length,pct:a.length?Math.round(100*good/a.length):0};};
+const pass = s=>s.pct>=PASS_SCORE;
+const color = pct=>pct<=25?'var(--red)':pct<=50?'var(--orange)':pct<=75?'var(--green)':'var(--indigo)';
+const status=(s)=>pass(s)?['Solide','ok']:(s.pct<=25?['Non acquis','low']:s.pct<=50?['Partiellement acquis','focus']:s.pct<=75?['À consolider','acquiring']:['En bonne voie','good']);
+function selectProfile(id){const p=PROFILES.find(x=>x.id===id);if(!p)return;activeProfile=id;activeSocle=pass(score(p,'F'))&&!pass(score(p,'C'))?'C':'F';activeFamily=STORIES[id].defaults[activeSocle]||'nombres';render();}
+function selectSocle(id){activeSocle=id;activeFamily=STORIES[activeProfile].defaults[id]||'nombres';renderBody();}
+function selectFamily(id){activeFamily=id;renderBody();}
+function renderDemo(){const p=pProfile();const oldScroll=$('demo-list').scrollLeft;$('demo-list').innerHTML=PROFILES.map(item=>{const f=score(item,'F'),c=score(item,'C'),pct=Math.round((f.good+c.good)/129*100);return `<button class="demo-profile ${activeProfile===item.id?'selected':''}" type="button" data-profile="${esc(item.id)}" aria-pressed="${activeProfile===item.id}"><span class="demo-topline"><span class="demo-name">${esc(item.name)}</span><span class="demo-pct">${pct} %</span></span><span class="demo-sub">${esc(item.type)}</span></button>`;}).join('');$('demo-list').scrollLeft=oldScroll;document.querySelectorAll('[data-profile]').forEach(btn=>btn.addEventListener('click',()=>selectProfile(btn.dataset.profile)));const btn=$('demo-toggle');btn.onclick=()=>{const box=$('demo-list'),open=box.style.display==='none';box.style.display=open?'flex':'none';btn.setAttribute('aria-expanded',String(open));btn.innerHTML=(open?'Masquer les profils':'Afficher les profils')+' '+icon('i-chevron');};}
+function renderBody(){const p=pProfile(),f=score(p,'F'),c=score(p,'C'),s=score(p,activeSocle),good=pass(s);const levels=[
+  {id:'F',name:'Les bases indispensables',stage:'D’ABORD',explain:'Les connaissances mathématiques essentielles pour comprendre les autres notions.',stats:f},
+  {id:'C',name:'Les notions à consolider',stage:'ENSUITE',explain:'Les notions qui s’appuient sur ces bases pour aller plus loin en mathématiques.',stats:c}
+];
+$('socle-list').innerHTML=levels.map((x,index)=>{const st=status(x.stats);const isFoundation=x.id==='F';return `<button type="button" class="socle ${isFoundation?'is-foundation':'is-consolidation'} ${x.id===activeSocle?'selected':''}" data-socle="${x.id}" aria-label="Niveau ${index+1} : ${x.name}, ${x.stats.pct} pour cent de réussite ; consulter les détails" aria-pressed="${activeSocle===x.id}">
+<div class="socle-top"><span class="socle-stage"><span class="socle-stage-num">${index+1}</span>${x.stage}</span><span class="socle-questions">${x.stats.n} questions</span></div>
+<div class="socle-line"><div class="socle-main-copy"><h3>${x.name}</h3><p class="socle-description">${x.explain}</p></div><span class="socle-number">${x.stats.pct} %</span></div>
+<div class="progress" role="meter" aria-label="Réussite pour ${x.name}" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${x.stats.pct}"><i style="width:${x.stats.pct}%;background:${color(x.stats.pct)}"></i></div>
+<div class="socle-meta"><span>${x.stats.good} bonnes réponses sur ${x.stats.n}</span><span class="status ${st[1]}">${st[0]}</span></div>
+<span class="socle-action">${activeSocle===x.id?'Niveau affiché ci-dessous':'Voir mon analyse'} ${icon('i-chevron')}</span></button>`;}).join('');
+document.querySelectorAll('[data-socle]').forEach(b=>b.addEventListener('click',()=>selectSocle(b.dataset.socle)));
+let strip;if(pass(f)&&pass(c))strip='<strong>Bonne nouvelle :</strong> tes bases indispensables et tes notions à consolider sont globalement maîtrisées. Inutile d’analyser les petites erreurs restantes.';else if(pass(f))strip='<strong>Tes bases indispensables sont solides.</strong> Nous pouvons maintenant examiner les notions précises à consolider.';else if(pass(c))strip='<strong>Résultats contrastés :</strong> certaines bases indispensables restent fragiles, mais les notions à consolider sont bien réussies. Il n’y a pas forcément de lien entre ces erreurs.';else strip='<strong>Les deux niveaux demandent de l’attention.</strong> Stud’Éval commence par tes bases indispensables : certaines difficultés ici peuvent expliquer celles qui apparaissent ensuite.';
+$('socle-reading').innerHTML=icon('i-info')+'<span>'+strip+'</span>';
+$('family-socle-label').textContent=activeSocle==='F'?'Les bases indispensables':'Les notions à consolider';
+$('domain-level').innerHTML=activeSocle==='F'
+  ? icon('i-info')+'<span><strong>Nous regardons d’abord tes bases indispensables.</strong> Ce sont les connaissances les plus importantes pour comprendre les notions suivantes.</span>'
+  : icon('i-info')+'<span><strong>Nous regardons maintenant les notions à consolider.</strong> Elles s’appuient sur les bases indispensables pour aller plus loin.</span>';
+if(good){$('step-2').hidden=true;$('step-3').hidden=true;const extra=activeSocle==='F'&&!pass(c)?'<button type="button" id="go-consolidation" class="action-btn">Voir les notions à consolider '+icon('i-arrow')+'</button>':'';
+$('family-area').innerHTML=`<div class="stop"><span class="stop-icon">${icon('i-check')}</span><div><h3>Ce niveau est suffisamment solide.</h3><p>Avec ${s.pct} % de réussite, il n’est pas utile de rechercher la cause de chaque petite erreur. ${activeSocle==='F'?'Passons aux notions à consolider.':'Bravo pour ces acquis.'}</p>${extra}</div></div>`;
+if(activeSocle==='F'&&!pass(c)){
+ $('socle-reading').innerHTML+=`<button type="button" class="action-btn" id="go-consolidation-visible">Examiner les notions à consolider ${icon('i-arrow')}</button>`;
+ $('go-consolidation-visible').addEventListener('click',()=>selectSocle('C'));
 }
-
-function afficherDashboard(data) {
-  document.getElementById('login-wrap').style.display  = 'none';
-  document.getElementById('dashboard').style.display   = 'block';
-
-  var fiches = data.fiches || [];
-  var prenom = data.prenom || "";
-  var nom    = data.nom    || "";
-  var classe = data.classe || "";
-
-  document.getElementById('eleve-name').textContent       = prenom + ' ' + nom;
-  document.getElementById('eleve-meta').textContent       = 'Lycée Benoît Fourneyron · ' + classe;
-  document.getElementById('dash-etablissement').textContent = 'Lycée Benoît Fourneyron';
-
-  // Calcul des stats globales sur toutes les fiches connues
-  var toutesLesFilchesIds = [];
-  THEMES.forEach(function(t) { t.fiches.forEach(function(f) { toutesLesFilchesIds.push(f.id); }); });
-  var total    = toutesLesFilchesIds.length;
-  var validees = fiches.filter(function(f) { return f.statut === 'quiz_final_valide'; }).length;
-  var alertes  = fiches.filter(function(f) { return f.statut === 'echec_3_tentatives'; }).length;
-
-  document.getElementById('stat-total').textContent    = total;
-  document.getElementById('stat-validees').textContent = validees;
-  document.getElementById('stat-alertes').textContent  = alertes;
-
-  var pct = total > 0 ? Math.round(validees / total * 100) : 0;
-  document.getElementById('progress-panel').style.display = 'block';
-  document.getElementById('progress-pct').textContent     = pct + '%';
-  setTimeout(function() { document.getElementById('progress-fill').style.width = pct + '%'; }, 100);
-  document.getElementById('progress-sub').textContent = validees + ' fiche' + (validees > 1 ? 's validées' : ' validée') + ' sur ' + total;
-
-  // Construire la map des statuts par fiche_id (dernière tentative)
-  var statutsMap = {};
-  fiches.forEach(function(f) {
-    if (!statutsMap[f.fiche_id] || (f.tentative_num || 0) > (statutsMap[f.fiche_id].tentative_num || 0)) {
-      statutsMap[f.fiche_id] = f;
-    }
-  });
-
-  // Générer le HTML des sections
-  var html = '';
-  THEMES.forEach(function(theme) {
-    html += '<div class="theme-section">';
-    html += '<div class="theme-header">';
-    html += '<div class="theme-icon ' + theme.iconClass + '">' + theme.icon + '</div>';
-    html += '<div>';
-    html += '<div class="theme-title">' + theme.titre + '</div>';
-    if (theme.fiches.length > 0) {
-      html += '<div class="theme-count">' + theme.fiches.length + ' fiche' + (theme.fiches.length > 1 ? 's' : '') + '</div>';
-    }
-    html += '</div>';
-    html += '</div>'; // theme-header
-
-    if (theme.fiches.length === 0) {
-      // Section vide — message en cours de création
-      html += '<div style="background:var(--surface);border:1px dashed var(--border);border-radius:var(--rl);padding:1.25rem 1.5rem;display:flex;align-items:center;gap:12px;">';
-      html += '<span style="font-size:18px;">🛠️</span>';
-      html += '<span style="font-size:13px;color:var(--text3);font-style:italic;">Les fiches sont en cours de création…</span>';
-      html += '</div>';
-    } else {
-      html += '<div class="fiches-grid">';
-      theme.fiches.forEach(function(fiche) {
-        var ficheData = statutsMap[fiche.id] || null;
-        var statut    = ficheData ? ficheData.statut : 'todo';
-        var score     = ficheData && ficheData.score_quiz ? ficheData.score_quiz + '%' : null;
-        var aUrl      = fiche.url && fiche.url !== '';
-
-        // Construire le lien complet avec params élève
-        var lien = '#';
-        if (aUrl) {
-          lien = fiche.url
-            + '?nom='        + encodeURIComponent((data.prenom || '') + ' ' + (data.nom || ''))
-            + '&classe='     + encodeURIComponent(data.classe || '')
-            + '&lycee='      + encodeURIComponent('Lycée Benoît Fourneyron')
-            + '&email='      + encodeURIComponent(currentEmail)
-            + '&prof=Reydellet'
-            + '&prof_email=' + encodeURIComponent('ar.reydellet@gmail.com');
-        }
-
-        // Statut affiché
-        var statutClass = 's-todo';
-        var statutTxt   = 'À faire';
-        var cardClass   = aUrl ? 'active' : 'bientot';
-
-        if (!aUrl) {
-          statutClass = 's-bientot';
-          statutTxt   = 'Bientôt disponible';
-        } else if (statut === 'quiz_final_valide') {
-          statutClass = 's-valide'; statutTxt = 'Validée ✓'; cardClass = 'done active';
-        } else if (statut === 'quiz_initial') {
-          statutClass = 's-encours'; statutTxt = 'En cours…'; cardClass = 'encours active';
-        } else if (statut === 'echec_3_tentatives') {
-          statutClass = 's-echec'; statutTxt = 'Intervention requise'; cardClass = 'active';
-        }
-
-        var btnClass = '';
-        var btnTxt   = 'Commencer →';
-        if (!aUrl) { btnClass = 'bientot-btn'; btnTxt = 'Bientôt…'; }
-        else if (statut === 'quiz_final_valide') { btnClass = 'done-btn'; btnTxt = '✓ Revoir la fiche'; }
-        else if (statut === 'quiz_initial')      { btnTxt = 'Continuer →'; }
-
-        html += '<div class="fiche-card ' + cardClass + '">';
-        html += '<div class="fiche-theme">' + fiche.titre + '</div>';
-        html += '<div class="fiche-statut ' + statutClass + '"><div class="statut-dot"></div><div class="statut-txt">' + statutTxt + '</div></div>';
-        if (score && aUrl) html += '<div class="fiche-score">Dernier score : ' + score + '</div>';
-        if (aUrl) {
-          html += '<a href="' + lien + '" target="_blank" class="fiche-btn ' + btnClass + '">' + btnTxt + '</a>';
-        } else {
-          html += '<div class="fiche-btn bientot-btn">' + btnTxt + '</div>';
-        }
-        html += '</div>'; // fiche-card
-      });
-      html += '</div>'; // fiches-grid
-    }
-
-    html += '</div>'; // theme-section
-  });
-
-  document.getElementById('fiches-section').innerHTML = html;
+return;}
+$('step-2').hidden=false;$('step-3').hidden=false;
+$('family-subtitle').textContent='Pendant ton évaluation, tu as répondu à des questions sur les nombres, les calculs, la géométrie et bien d’autres notions.';
+const cards=FAMILY_DEFS.map(def=>({...def,stats:score(p,activeSocle,def.pred)})).sort((a,b)=>a.stats.pct-b.stats.pct);
+$('family-area').innerHTML='<div class="family-grid">'+cards.map(x=>{const st=status(x.stats);return `<button type="button" class="family ${activeFamily===x.id?'active':''}" data-family="${x.id}" aria-pressed="${activeFamily===x.id}"><div class="family-top"><h3>${esc(x.title)}</h3><div class="family-pct">${x.stats.pct} %</div></div><p class="family-desc">${esc(FAMILY_COPY[x.id].content)}</p><p class="family-purpose">${esc(FAMILY_COPY[x.id].importance)}</p><div class="progress"><i style="width:${x.stats.pct}%;background:${color(x.stats.pct)}"></i></div><div class="family-bottom"><span>${x.stats.good} bonnes réponses sur ${x.stats.n}</span><span class="${activeFamily===x.id?'family-selec':''}">${activeFamily===x.id?'Voir mon explication':st[0]}</span></div></button>`;}).join('')+'</div><p class="family-info">'+icon('i-info')+'Certaines connaissances interviennent dans plusieurs familles. Ces pourcentages ne s’additionnent pas.</p>';
+document.querySelectorAll('[data-family]').forEach(b=>b.addEventListener('click',()=>selectFamily(b.dataset.family)));
+renderAnalysis(p,activeSocle);
 }
-
-function deconnexion() {
-  currentEmail = ''; currentData = null;
-  document.getElementById('dashboard').style.display  = 'none';
-  document.getElementById('login-wrap').style.display = 'flex';
-  document.getElementById('login-email').value        = '';
-  document.getElementById('btn-login').disabled       = false;
-  document.getElementById('btn-login').textContent    = 'Accéder à mes fiches →';
-  document.getElementById('fiches-section').innerHTML = '';
-  document.getElementById('progress-panel').style.display = 'none';
+function renderAnalysis(p,s){const def=FAMILY_DEFS.find(f=>f.id===activeFamily),familyScore=score(p,s,def.pred);const original=STORIES[p.id].cases[s+':'+activeFamily];const simplified=SIMPLE[p.id]?.[s+':'+activeFamily];
+let kind,title,body,actions,codes=[];
+if(familyScore.n<4){kind='incertain';title='Nous manquons d’indices dans cette famille.';body=`Il n’y a que ${familyScore.n} question${familyScore.n>1?'s':''} ici. Ce n’est pas suffisant pour expliquer avec certitude l’origine de tes difficultés.`;actions=['Retravailler uniquement les points non réussis, si besoin.'];}
+else if(pass(familyScore)){kind='ok';title='Cette famille est globalement bien maîtrisée.';body=`Tu as réussi ${familyScore.good} questions sur ${familyScore.n}. Nous ne cherchons pas à expliquer quelques erreurs isolées alors que l’ensemble est satisfaisant.`;actions=[];}
+else if(original&&simplified){kind=original.kind;title=simplified.title;body=simplified.body;actions=simplified.actions;codes=original.codes||[];}
+else if(original){kind=original.kind;title=original.title;body=original.body;actions=(original.actions||[]).slice(0,3);codes=original.codes||[];}
+else if(s==='C'&&pass(score(p,'F'))){kind='ciblé';title='Il y a des connaissances précises à retravailler.';body='Tes bases indispensables sont solides. Dans cette famille, rien ne permet d’attribuer tes erreurs à une difficulté plus ancienne. Tu peux travailler directement les connaissances concernées.';actions=['Reprendre les exercices que tu n’as pas réussis.','Vérifier ensuite tes progrès.'];}
+else {kind='incertain';title='Nous ne trouvons pas d’origine commune assez claire.';body='Tu as rencontré des difficultés dans cette famille, mais tes réponses ne permettent pas de dire qu’elles viennent toutes de la même connaissance. Inutile d’inventer une explication : concentrons-nous sur les points précis à retravailler.';actions=['Reprendre deux ou trois connaissances non réussies.','Faire le point après un premier entraînement.'];}
+const kinds={'structural':['Une base à reprendre','structural'],'ciblé':['Un apprentissage précis','cible'],'incertain':['Origine non identifiée','incertain'],'contraste':['Résultats contrastés','contraste'],'ok':['Acquis satisfaisants','ok']};const k=kinds[kind]||kinds.incertain;
+const evidence=codes.length?`<details class="evidence"><summary>Pourquoi cette explication ? Voir quelques réponses</summary><div class="evidence-list">${codes.slice(0,3).map(code=>{const i=ALL[code];if(!i)return '';const good=p.answers[i.index]==='1';return `<div class="evidence-item ${good?'good':'bad'}"><span class="evidence-status">${good?'✓ Réponse réussie':'• À retravailler'} · ${esc(i.level)}</span><p>${esc(i.title)}</p></div>`;}).join('')}</div><p class="evidence-note">Ces réponses donnent des indices, mais une question ne suffit pas à prouver une origine.</p></details>`:'';
+const actionBlock=actions.length?`<div class="analysis-next"><h4>Pour progresser, je commence par…</h4><div class="action-list">${actions.slice(0,3).map((item,i)=>`<div class="action-item"><span class="action-num">${i+1}</span><span>${esc(item)}</span></div>`).join('')}</div>${evidence}</div>`:(evidence?`<div class="analysis-next">${evidence}</div>`:'');
+$('analysis-area').innerHTML=`<div class="analysis"><div class="analysis-main"><span class="analysis-type ${k[1]}">${icon(kind==='ok'?'i-check':'i-info')} ${k[0]}</span><h3>${esc(title)}</h3><p>${esc(body)}</p></div>${actionBlock}</div>`;
 }
+function render(){const p=pProfile();const f=score(p,'F'),c=score(p,'C'),total=f.good+c.good,pct=Math.round(total/129*100);const intro=STUDENT_INTRO[p.id];$('student-name').textContent=p.name+' · 6e B';$('menu-name').textContent=p.name;$('menu-initials').textContent=p.name.split(' ').slice(0,2).map(x=>x[0]).join('');$('total-percent').textContent=pct+' %';$('correct-count').textContent=total;$('overall-title').textContent=intro.title;$('overall-description').textContent=intro.intro;const wheel=$('donut-progress');wheel.setAttribute('stroke-dashoffset',String(CIRC*(1-pct/100)));wheel.style.stroke=color(pct);$('last-word').textContent=(pass(f)&&pass(c))?'Tes connaissances sont solides : tu peux poursuivre tes apprentissages sans analyse supplémentaire.':(pass(f)?'Tes bases indispensables sont solides. Tu peux maintenant travailler les notions précises qui te posent problème.':(pass(c)?'Certaines bases indispensables restent fragiles, sans expliquer nécessairement toutes tes erreurs.':'Nous avons repéré quelques difficultés importantes pour t’aider à progresser. Inutile de chercher une explication à chaque erreur.'));renderDemo();renderBody();}
+// Démonstration : le sélecteur de profils est volontairement hors de l’interface élève réelle.
+// Le diagnostic contient 85 questions Fondations et 44 questions Consolidation, toutes issues du référentiel V6.
+render();
+
 </script>
-</body>
-</html>
+</body></html>
